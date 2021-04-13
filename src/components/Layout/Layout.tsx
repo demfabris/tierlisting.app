@@ -6,5 +6,7 @@ interface Props {
   children?: ReactNode
 }
 export const Layout = ({ children }: Props) => (
-  <Styled.Container>{children}</Styled.Container>
+  <Styled.View>
+    <Styled.Container>{children}</Styled.Container>
+  </Styled.View>
 )

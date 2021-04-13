@@ -1,15 +1,24 @@
 import styled from 'styled-components'
 
-const Container = styled.section`
+const View = styled.section`
   display: flex;
   justify-content: center;
   height: 100%;
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
 
-  background: blue;
+  background: ${(props) => props.theme.colors.bg};
+`
+
+const Container = styled.main`
+  display: flex;
+  justify-content: center;
+  width: 85%;
+
+  background: green;
 `
 
 export const Styled = {
+  View,
   Container
 }
