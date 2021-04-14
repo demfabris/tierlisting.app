@@ -4,15 +4,16 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100px;
+  height: 10em;
   width: 100%;
+  padding: 0 30px;
 `
 
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 140px;
+  width: 7.5em;
   cursor: pointer;
 
   font: ${(props) => props.theme.font.big};
@@ -29,20 +30,20 @@ const NavigationContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80px;
-
-  svg {
-    width: 32px;
-    height: 32px;
-
-    color: ${(props) => props.theme.colors.fg};
-  }
+  width: 5em;
 `
 
 const NavigationButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+
+  svg {
+    width: 2.5em;
+    height: 2.5em;
+
+    color: ${(props) => props.theme.colors.fg};
+  }
 `
 
 export const S = {

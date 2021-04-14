@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { SvgPlus } from 'assets'
-import { Layout } from '../components'
+import { Layout, Button, Title } from '../components'
 
 import { S } from './index/index.styles'
 
@@ -8,14 +8,14 @@ const Index = () => {
   return (
     <Layout>
       <S.Container>
-        <S.Title>
+        <Title>
           Create a tierlist<b>.</b>
-        </S.Title>
+        </Title>
         <Link href="new">
-          <S.Button>
+          <Button>
             New tierlist
             <SvgPlus />
-          </S.Button>
+          </Button>
         </Link>
       </S.Container>
     </Layout>

@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "types": ["./src/interfaces"],
+    "types": ["node", "react"],
     "jsx": "preserve",
     "lib": ["dom", "es2017"],
     "module": "esnext",
@@ -14,14 +13,13 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "removeComments": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
     "baseUrl": "./src",
-    "paths": {
-      "hooks": ["./src/hooks/**"]
-    }
+    "paths": {}
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]

@@ -7,7 +7,8 @@ const View = styled.section`
   width: 100%;
   margin: 0 auto;
 
-  background: ${(props) => props.theme.colors.bg};
+  background-color: ${(props) => props.theme.colors.bg};
+  background-repeat: no-repeat;
 `
 
 const Container = styled.div`
@@ -15,7 +16,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100%;
-  width: 85%;
+  width: 900px;
 `
 
 export const S = {

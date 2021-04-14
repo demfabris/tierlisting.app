@@ -5,6 +5,7 @@ export const darkTheme = {
     sg: '#5fb3b3',
     sgAlt: '#fac863',
     sgAtt: '#ec5f67',
+    hg: '#f99157',
     disabled: '#a7adba'
   }
 }
