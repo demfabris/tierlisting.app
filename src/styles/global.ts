@@ -4,16 +4,14 @@ export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
+    outline: none;
     box-sizing: border-box;
-  }
-
-  *:focus {
-    outline: 0;
   }
 
   html,
   body,
   #__next {
     height: 100%;
+    background: none;
   }
 `

@@ -13,12 +13,11 @@ const View = styled.section`
 const Container = styled.main`
   display: flex;
   justify-content: center;
+  height: 100%;
   width: 85%;
-
-  background: green;
 `
 
-export const Styled = {
+export const S = {
   View,
   Container
 }

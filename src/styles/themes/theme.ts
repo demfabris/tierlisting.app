@@ -14,6 +14,7 @@ export const theme: Theme = {
   },
   font: {
     head: '700 24px Poppins ',
+    big: '700 18px Poppins',
     regular: '500 16px Poppins'
   }
 }

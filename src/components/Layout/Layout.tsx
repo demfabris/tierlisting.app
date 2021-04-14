@@ -1,12 +1,10 @@
-import { ReactNode } from 'react'
+import { S } from './Layout.styles'
+import { Header } from '../Header'
 
-import { Styled } from './Layout.styles'
-
-interface Props {
-  children?: ReactNode
-}
-export const Layout = ({ children }: Props) => (
-  <Styled.View>
-    <Styled.Container>{children}</Styled.Container>
-  </Styled.View>
+export const Layout = () => (
+  <S.View>
+    <S.Container>
+      <Header />
+    </S.Container>
+  </S.View>
 )

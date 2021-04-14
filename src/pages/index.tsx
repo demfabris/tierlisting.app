@@ -10,9 +10,8 @@ const Index = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
-        <GlobalStyle />
-      </Layout>
+      <Layout />
+      <GlobalStyle />
     </ThemeProvider>
   )
 }

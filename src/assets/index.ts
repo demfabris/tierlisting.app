@@ -1,0 +1,7 @@
+export { SvgLogo } from './SvgLogo'
+export { SvgEdit } from './SvgEdit'
+export { SvgMoon } from './SvgMoon'
+export { SvgHelpCircle } from './SvgHelpCircle'
+export { SvgType } from './SvgType'
+export { SvgImage } from './SvgImage'
+export { SvgPlus } from './SvgPlus'
