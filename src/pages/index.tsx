@@ -1,18 +1,24 @@
-/* import Link from 'next/link' */
-/* import Layout from '../components/Layout' */
-import { ThemeProvider } from 'styled-components'
-import { GlobalStyle } from '../styles/'
+import Link from 'next/link'
+import { SvgPlus } from 'assets'
 import { Layout } from '../components'
-import { useThemeSwitch } from '../hooks'
+
+import { S } from './index/index.styles'
 
 const Index = () => {
-  const theme = useThemeSwitch('dark')
-
   return (
-    <ThemeProvider theme={theme}>
-      <Layout />
-      <GlobalStyle />
-    </ThemeProvider>
+    <Layout>
+      <S.Container>
+        <S.Title>
+          Create a tierlist<b>.</b>
+        </S.Title>
+        <Link href="new">
+          <S.Button>
+            New tierlist
+            <SvgPlus />
+          </S.Button>
+        </Link>
+      </S.Container>
+    </Layout>
   )
 }
 

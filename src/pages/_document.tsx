@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <link rel="icon" href="favicon.ico" />
           <link
-            href="https://fonts.googleapis.com/css?family=Poppins:400,500,700"
+            href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900"
             rel="stylesheet"
           />
         </Head>

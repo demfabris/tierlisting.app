@@ -13,6 +13,7 @@ const LogoContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 140px;
+  cursor: pointer;
 
   font: ${(props) => props.theme.font.big};
   color: ${(props) => props.theme.colors.fg};

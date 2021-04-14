@@ -1,10 +1,15 @@
-import { S } from './Layout.styles'
 import { Header } from '../Header'
 
-export const Layout = () => (
+import { S } from './Layout.styles'
+
+interface Props {
+  children: React.ReactNode
+}
+export const Layout = ({ children }: Props) => (
   <S.View>
     <S.Container>
       <Header />
+      {children}
     </S.Container>
   </S.View>
 )

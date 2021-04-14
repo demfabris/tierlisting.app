@@ -10,9 +10,10 @@ const View = styled.section`
   background: ${(props) => props.theme.colors.bg};
 `
 
-const Container = styled.main`
+const Container = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: 100%;
   width: 85%;
 `

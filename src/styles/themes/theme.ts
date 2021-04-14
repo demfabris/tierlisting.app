@@ -13,8 +13,14 @@ export const theme: Theme = {
     ultra: 'box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px'
   },
   font: {
-    head: '700 24px Poppins ',
+    head: '700 36px Poppins ',
     big: '700 18px Poppins',
     regular: '500 16px Poppins'
+  },
+  transitions: {
+    fast: '.3s ease',
+    fancy: '.5s ease',
+    bouncy: '.6s cubic-bezier(0.25, 0.75, 0.5, 1.25)',
+    bouncyFast: '.4s cubic-bezier(0.25, 0.75, 0.5, 1.25)'
   }
 }
