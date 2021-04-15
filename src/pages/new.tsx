@@ -1,4 +1,5 @@
-import { Layout, Tier, Title } from '../components'
+import { Layout, Title } from '../components'
+import { Tierlist } from '../modules'
 
 import { S } from './styles/new.styles'
 
@@ -9,12 +10,7 @@ const New = () => {
         <S.Title>
           <Title text="My tierlist" canEdit={true} />
         </S.Title>
-        <S.Tierlist>
-          <Tier />
-          <Tier />
-          <Tier />
-          <Tier />
-        </S.Tierlist>
+        <Tierlist />
       </S.Container>
     </Layout>
   )

@@ -4,6 +4,7 @@ interface Props {
   children: React.ReactNode
   filled?: boolean
   alt?: boolean
+  outlined?: boolean
   iconSize?: string
   width?: string
   height?: string
@@ -15,6 +16,7 @@ export const Button = ({
   height = '3em',
   filled = false,
   alt = false,
+  outlined = false,
   iconSize = '1.25em',
   ...rest
 }: Props) => {
@@ -22,6 +24,7 @@ export const Button = ({
     <S.Container
       filled={filled}
       alt={alt}
+      outlined={outlined}
       iconSize={iconSize}
       width={width}
       height={height}

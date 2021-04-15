@@ -3,15 +3,20 @@ import { useRef } from 'react'
 import { S } from './Tier.styles'
 import { Button } from 'components'
 
-export const Tier = () => {
+interface Props {
+  _id: number
+  items: string[]
+  destroy: () => void
+}
+export const Tier = ({ _id, items, destroy }: Props) => {
   return (
     <S.Container>
-      <TierRank />
+      <TierHead _id={_id} destroy={destroy} items={items} />
     </S.Container>
   )
 }
 
-const TierRank = () => {
+const TierHead = ({ _id, items, destroy }: Props) => {
   const inputRef = useRef<HTMLTextAreaElement>(null!)
 
   const handleClickEditText = (target: HTMLTextAreaElement) => {
@@ -24,8 +29,8 @@ const TierRank = () => {
   }
 
   return (
-    <S.Rank.Container>
-      <S.Rank.Edit.Image>
+    <S.TierHead.Container>
+      <S.TierHead.Edit.Image>
         <Button
           alt
           height="1.25em"
@@ -35,8 +40,8 @@ const TierRank = () => {
         >
           <SvgImage />
         </Button>
-      </S.Rank.Edit.Image>
-      <S.Rank.Edit.Text>
+      </S.TierHead.Edit.Image>
+      <S.TierHead.Edit.Text>
         <Button
           alt
           height="1.25em"
@@ -47,13 +52,24 @@ const TierRank = () => {
         >
           <SvgType />
         </Button>
-      </S.Rank.Edit.Text>
-      <S.Rank.Edit.Clear>
-        <Button alt height="1.25em" width="1.25em" role="button" title="Clear">
+      </S.TierHead.Edit.Text>
+      <S.TierHead.Edit.Clear>
+        <Button
+          alt
+          height="1.25em"
+          width="1.25em"
+          role="button"
+          title="Clear"
+          onClick={() => destroy()}
+        >
           <SvgTrash />
         </Button>
-      </S.Rank.Edit.Clear>
-      <S.Rank.Input defaultValue="Tier 1" ref={inputRef} spellCheck={false} />
-    </S.Rank.Container>
+      </S.TierHead.Edit.Clear>
+      <S.TierHead.Input
+        defaultValue={`Tier ${_id}`}
+        ref={inputRef}
+        spellCheck={false}
+      />
+    </S.TierHead.Container>
   )
 }

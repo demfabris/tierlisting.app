@@ -3,6 +3,7 @@ import styled from 'styled-components'
 type StyledProps = {
   filled: boolean
   alt: boolean
+  outlined: boolean
   iconSize: string
   height: string
   width: string
@@ -49,14 +50,20 @@ const Container = styled.button<StyledProps>`
     if (props.alt) {
       return `
         background: none;
-        svg {
-          color: var(--fg);
-        }
+        svg { color: var(--fg) };
       `
     }
 
     if (props.filled) {
       return `background: var(--fg)`
+    }
+
+    if (props.outlined) {
+      return `
+        color: var(--fg);
+        border: 2px solid var(--sg);
+        svg { color: var(--fg) };
+      `
     }
   }}
 `
