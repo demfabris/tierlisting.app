@@ -7,6 +7,16 @@ const Container = styled.div`
   height: 100%;
 `
 
+const Title = styled.div`
+  margin: 10vh auto;
+`
+
+const Button = styled.div`
+  margin: 10vh auto;
+`
+
 export const S = {
-  Container
+  Container,
+  Title,
+  Button
 }

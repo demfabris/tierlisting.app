@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { SvgHelpCircle, SvgLogo, SvgMoon } from 'assets'
 
 import { S } from './Header.styles'
+import { Button } from 'components'
 
 export const Header = () => {
   return (
@@ -15,12 +16,12 @@ export const Header = () => {
         </S.Logo.Container>
       </Link>
       <S.Navigation.Container>
-        <S.Navigation.Button>
+        <Button alt iconSize="1.75em" onClick={() => alert('oi')}>
           <SvgMoon />
-        </S.Navigation.Button>
-        <S.Navigation.Button>
+        </Button>
+        <Button alt iconSize="1.75em">
           <SvgHelpCircle />
-        </S.Navigation.Button>
+        </Button>
       </S.Navigation.Container>
     </S.Container>
   )

@@ -16,7 +16,8 @@ export const theme: Theme = {
     head: '700 3em Poppins ',
     big: '700 1.5em Poppins',
     medium: '700 1.25em Poppins',
-    regular: '500 1em Poppins'
+    regular: '500 1em Poppins',
+    regularBold: '700 1em Poppins'
   },
   transitions: {
     fast: '.3s ease',

@@ -13,16 +13,21 @@ const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 7.5em;
   cursor: pointer;
 
   font: ${(props) => props.theme.font.big};
   color: ${(props) => props.theme.colors.fg};
 `
 
-const LogoText = styled.div`
+const LogoText = styled.p`
+  margin-left: 0.5em;
+
   > b {
     color: ${(props) => props.theme.colors.sg};
+  }
+
+  @media (max-width: 360px) {
+    display: none;
   }
 `
 
@@ -30,20 +35,7 @@ const NavigationContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 5em;
-`
-
-const NavigationButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  svg {
-    width: 2.5em;
-    height: 2.5em;
-
-    color: ${(props) => props.theme.colors.fg};
-  }
+  width: 6em;
 `
 
 export const S = {
@@ -53,7 +45,6 @@ export const S = {
     Text: LogoText
   },
   Navigation: {
-    Container: NavigationContainer,
-    Button: NavigationButton
+    Container: NavigationContainer
   }
 }
