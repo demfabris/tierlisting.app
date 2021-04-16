@@ -1,62 +1,60 @@
 import styled from 'styled-components'
 
+type StyledProps = { editing: boolean }
 const Container = styled.li`
   width: 100%;
   height: 5em;
   list-style-type: none;
   border-radius: 2px;
-  margin: 0.5em auto;
+  margin: 0.25em auto;
 
   border: 2px solid ${(props) => props.theme.colors.sg};
   box-shadow: ${(props) => props.theme.shadows.hard};
 `
 
 const TierHeadContainer = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
 `
 
-const TierHeadInput = styled.textarea`
+const TierHeadInput = styled.span<StyledProps>`
+  --sg: ${(props) => props.theme.colors.sg};
+  --fg: ${(props) => props.theme.colors.fg};
+  --bg: ${(props) => props.theme.colors.bg};
+
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 5em;
   border: none;
-  background: none;
 
-  resize: none;
-  white-space: normal;
-  text-align: justify;
-  padding-left: 1em;
-  padding-right: 0.5em;
-  padding-top: 1.5em;
   overflow: hidden;
+  text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 
-  border-right: 2px solid ${(props) => props.theme.colors.sg};
+  transition: ${(props) => props.theme.transitions.fast};
   font: ${(props) => props.theme.font.regularBold};
-  color: ${(props) => props.theme.colors.fg};
+  border-right: 2px solid var(--sg);
+  color: var(--fg);
+  background: var(--bg);
+
+  transform: ${(props) => (!props.editing ? 'translateX(-2em)' : 'none')};
 `
 
-const TierHeadEdit = styled.div`
-  position: absolute;
-  left: -2em;
-  margin-top: -0.25em;
+const TierHeadEditWrapper = styled.div`
+  --sg: ${(props) => props.theme.colors.sg};
 
-  svg {
-    color: ${(props) => props.theme.colors.sg};
-  }
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 2em;
 
-const TierHeadEditImage = styled(TierHeadEdit)`
-  top: 0;
-`
-
-const TierHeadEditText = styled(TierHeadEdit)`
-  top: 1.75em;
-`
-
-const TierHeadEditClear = styled(TierHeadEdit)`
-  top: 3.5em;
+  border-right: 2px solid var(--sg);
 `
 
 export const S = {
@@ -65,9 +63,7 @@ export const S = {
     Input: TierHeadInput,
     Container: TierHeadContainer,
     Edit: {
-      Text: TierHeadEditText,
-      Image: TierHeadEditImage,
-      Clear: TierHeadEditClear
+      Wrapper: TierHeadEditWrapper
     }
   }
 }

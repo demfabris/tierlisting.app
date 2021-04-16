@@ -1,75 +1,79 @@
-import { SvgImage, SvgType, SvgTrash } from 'assets'
-import { useRef } from 'react'
-import { S } from './Tier.styles'
+import { MutableRefObject, useRef } from 'react'
+
 import { Button } from 'components'
+import { useToggleEditStore } from 'store'
+import { SvgImage, SvgType, SvgTrash } from 'assets'
+
+import { S } from './Tier.styles'
 
 interface Props {
   _id: number
   items: string[]
   destroy: () => void
 }
-export const Tier = ({ _id, items, destroy }: Props) => {
+export const Tier = ({ ...props }: Props) => {
   return (
     <S.Container>
-      <TierHead _id={_id} destroy={destroy} items={items} />
+      <TierHead {...props} />
     </S.Container>
   )
 }
 
-const TierHead = ({ _id, items, destroy }: Props) => {
-  const inputRef = useRef<HTMLTextAreaElement>(null!)
-
-  const handleClickEditText = (target: HTMLTextAreaElement) => {
-    target.focus()
-
-    // Focus and move cursor to the end
-    const { value } = target
-    target.value = ''
-    target.value = value
-  }
+const TierHead = ({ ...props }: Props) => {
+  const ref = useRef<HTMLSpanElement>(null!)
+  const editing = useToggleEditStore((state) => state.editing)
 
   return (
     <S.TierHead.Container>
-      <S.TierHead.Edit.Image>
-        <Button
-          alt
-          height="1.25em"
-          width="1.25em"
-          role="button"
-          title="Add image"
-        >
-          <SvgImage />
-        </Button>
-      </S.TierHead.Edit.Image>
-      <S.TierHead.Edit.Text>
-        <Button
-          alt
-          height="1.25em"
-          width="1.25em"
-          role="button"
-          title="Add text"
-          onClick={() => handleClickEditText(inputRef.current)}
-        >
-          <SvgType />
-        </Button>
-      </S.TierHead.Edit.Text>
-      <S.TierHead.Edit.Clear>
-        <Button
-          alt
-          height="1.25em"
-          width="1.25em"
-          role="button"
-          title="Clear"
-          onClick={() => destroy()}
-        >
-          <SvgTrash />
-        </Button>
-      </S.TierHead.Edit.Clear>
+      <TierHeadEditButtons headInputRef={ref} {...props} />
       <S.TierHead.Input
-        defaultValue={`Tier ${_id}`}
-        ref={inputRef}
+        ref={ref}
         spellCheck={false}
-      />
+        contentEditable={editing}
+        editing={editing}
+      >
+        Tier {props._id}
+      </S.TierHead.Input>
     </S.TierHead.Container>
+  )
+}
+
+interface ITierHeadEditButtons extends Props {
+  headInputRef: MutableRefObject<HTMLSpanElement>
+}
+const TierHeadEditButtons = ({
+  headInputRef,
+  ...props
+}: ITierHeadEditButtons) => {
+  const handleClickEditText = (target: HTMLSpanElement) => {
+    target.focus()
+  }
+
+  return (
+    <S.TierHead.Edit.Wrapper>
+      <Button alt height="1em" width="1em" role="button" title="Add image">
+        <SvgImage />
+      </Button>
+      <Button
+        alt
+        height="1em"
+        width="1em"
+        role="button"
+        title="Add text"
+        onClick={() => handleClickEditText(headInputRef.current)}
+      >
+        <SvgType />
+      </Button>
+      <Button
+        alt
+        height="1em"
+        width="1em"
+        role="button"
+        title="Clear"
+        onClick={() => props.destroy()}
+      >
+        <SvgTrash />
+      </Button>
+    </S.TierHead.Edit.Wrapper>
   )
 }

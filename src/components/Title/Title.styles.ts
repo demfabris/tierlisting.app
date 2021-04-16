@@ -1,16 +1,19 @@
 import styled from 'styled-components'
 
-const Container = styled.div`
+type StyledProps = { editing: boolean }
+
+const Container = styled.div<StyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+
+  opacity: ${(props) => (props.editing ? '0.5' : '1')};
 `
 
-const Input = styled.textarea`
+const Input = styled.h1`
   text-align: center;
   background: none;
-  width: 100%;
   height: 1.5em;
   border: none;
   resize: none;
@@ -20,13 +23,7 @@ const Input = styled.textarea`
   color: ${(props) => props.theme.colors.fg};
 `
 
-const Edit = styled.div`
-  position: absolute;
-  top: -2.5em;
-`
-
 export const S = {
   Container,
-  Input,
-  Edit
+  Input
 }

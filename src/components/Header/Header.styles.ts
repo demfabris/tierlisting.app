@@ -6,7 +6,6 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   height: 10em;
   width: 100%;
-  padding: 0 30px;
 `
 
 const LogoContainer = styled.div`
