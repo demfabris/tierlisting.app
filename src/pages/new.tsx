@@ -7,7 +7,9 @@ const New = () => {
   return (
     <Layout>
       <S.Container>
-        <ToggleEdit />
+        <S.Button.Container>
+          <ToggleEdit />
+        </S.Button.Container>
         <S.Title>
           <Title text="My tierlist" canEdit={true} />
         </S.Title>

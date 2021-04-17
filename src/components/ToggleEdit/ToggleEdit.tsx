@@ -10,15 +10,14 @@ export const ToggleEdit = () => {
 
   return (
     <S.Container editing={editing} title="Toggle edit mode">
-      <Button
-        alt
-        width="auto"
-        height="auto"
-        iconSize="1.75em"
+      <Button.Filled
+        width="9em"
         onClick={() => toggle(!editing)}
+        active={editing}
       >
+        {editing ? 'Editing' : 'Edit mode'}
         <SvgEdit />
-      </Button>
+      </Button.Filled>
     </S.Container>
   )
 }

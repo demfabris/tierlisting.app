@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 type StyledProps = { editing: boolean }
-
 const Container = styled.div<StyledProps>`
   display: flex;
   align-items: center;
@@ -12,15 +11,14 @@ const Container = styled.div<StyledProps>`
 `
 
 const Input = styled.h1`
-  text-align: center;
   background: none;
-  height: 1.5em;
+  width: 100%;
   border: none;
   resize: none;
   overflow: hidden;
 
+  color: var(--fg);
   font: ${(props) => props.theme.font.head};
-  color: ${(props) => props.theme.colors.fg};
 `
 
 export const S = {

@@ -32,10 +32,10 @@ export const Tierlist = () => {
         ))}
       </S.Container>
       <S.Button>
-        <Button outlined width="8em" iconSize="1.35em" onClick={() => append()}>
+        <Button.Outlined iconSize="1.35em" onClick={() => append()}>
           Add tier
           <SvgPlus />
-        </Button>
+        </Button.Outlined>
       </S.Button>
     </>
   )

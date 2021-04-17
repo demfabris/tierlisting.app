@@ -2,35 +2,32 @@ import { S } from './Button.styles'
 
 interface Props {
   children: React.ReactNode
-  filled?: boolean
-  alt?: boolean
-  outlined?: boolean
   iconSize?: string
   width?: string
   height?: string
+  active?: boolean
   [rest: string]: unknown
 }
-export const Button = ({
-  children,
-  width = '9em',
-  height = '3em',
-  filled = false,
-  alt = false,
-  outlined = false,
-  iconSize = '1.25em',
-  ...rest
-}: Props) => {
-  return (
-    <S.Container
-      filled={filled}
-      alt={alt}
-      outlined={outlined}
-      iconSize={iconSize}
-      width={width}
-      height={height}
-      {...rest}
-    >
-      {children}
-    </S.Container>
-  )
+
+const Filled = ({ children, ...props }: Props) => (
+  <S.Filled {...props}>{children}</S.Filled>
+)
+
+const Alt = ({ children, ...props }: Props) => (
+  <S.Alt {...props}>{children}</S.Alt>
+)
+
+const Outlined = ({ children, ...props }: Props) => (
+  <S.Outlined {...props}>{children}</S.Outlined>
+)
+
+const Void = ({ children, ...props }: Props) => (
+  <S.Void {...props}>{children}</S.Void>
+)
+
+export const Button = {
+  Filled,
+  Alt,
+  Outlined,
+  Void
 }

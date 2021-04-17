@@ -9,10 +9,23 @@ const Container = styled.div`
 `
 
 const Title = styled.div`
-  margin: 5vh auto;
+  margin: 3em auto;
+  margin-left: 0;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  margin: 3em auto;
 `
 
 export const S = {
   Container,
-  Title
+  Title,
+  Button: {
+    Container: ButtonContainer
+  }
 }

@@ -1,24 +1,21 @@
 import styled from 'styled-components'
 
 type StyledProps = {
-  filled: boolean
-  alt: boolean
-  outlined: boolean
   iconSize: string
   height: string
   width: string
+  active: boolean
+  [rest: string]: unknown
 }
-const Container = styled.button<StyledProps>`
-  --sg: ${(props) => props.theme.colors.sg};
-  --fg: ${(props) => props.theme.colors.fg};
-  --bg: ${(props) => props.theme.colors.bg};
+const Base = styled.button<StyledProps>`
+  --active: var(--sg);
 
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
   background: none;
-  color: var(--bg);
+  padding: 0 1em;
 
   border: none;
   border-top-right-radius: 1em;
@@ -27,47 +24,75 @@ const Container = styled.button<StyledProps>`
   border-top-left-radius: 0.125em;
 
   width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  height: ${(props) => props.height ?? '3em'};
   font: ${(props) => props.theme.font.medium};
   box-shadow: ${(props) => props.theme.shadows.hard};
-  transition: ${(props) => props.theme.transitions.fast};
 
   svg {
-    color: var(--bg);
-    width: ${(props) => props.iconSize};
-    height: ${(props) => props.iconSize};
+    margin-left: 0.5em;
+    width: ${(props) => props.iconSize ?? '1.25em'};
+    height: ${(props) => props.iconSize ?? '1.25em'};
   }
+`
 
-  &:hover svg {
-    color: ${(props) => (props.alt ? 'var(--sg)' : 'none')};
+const Filled = styled(Base)<StyledProps>`
+  background: ${(props) => (props.active ? 'var(--active)' : 'var(--fg)')};
+
+  * {
+    color: var(--bg);
   }
 
   &:hover {
-    background: ${(props) => (props.filled ? 'var(--sg)' : 'none')};
+    background: var(--sg);
+  }
+`
+
+const Alt = styled(Base)<StyledProps>`
+  background: ${(props) => (props.active ? 'var(--active)' : 'none')};
+
+  svg {
+    color: var(--fg);
+  }
+`
+
+const Outlined = styled(Base)<StyledProps>`
+  color: var(--fg);
+  border: 2px solid var(--sg);
+
+  svg {
+    color: var(--fg);
   }
 
-  ${(props) => {
-    if (props.alt) {
-      return `
-        background: none;
-        svg { color: var(--fg) };
-      `
-    }
+  &:hover {
+    background: var(--sg);
+  }
+`
 
-    if (props.filled) {
-      return `background: var(--fg)`
-    }
+const Void = styled(Base)<StyledProps>`
+  background: none;
+  border: none;
+  padding: 0;
+  height: auto;
 
-    if (props.outlined) {
-      return `
-        color: var(--fg);
-        border: 2px solid var(--sg);
-        svg { color: var(--fg) };
-      `
+  svg {
+    margin: 0;
+    color: var(--fg);
+  }
+
+  &:hover {
+    * {
+      color: var(--sg);
     }
-  }}
+  }
+
+  &:active {
+    transform: none;
+  }
 `
 
 export const S = {
-  Container
+  Filled,
+  Alt,
+  Outlined,
+  Void
 }

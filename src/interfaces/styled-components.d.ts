@@ -1,5 +1,5 @@
 import 'styled-components'
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends AppSettings.Theme {}
+  export interface DefaultTheme extends AppSettings.CurrentTheme {}
 }

@@ -19,7 +19,8 @@
     "strict": true,
     "target": "esnext",
     "baseUrl": "./src",
-    "paths": {}
+    "paths": {},
+    "allowJs": true
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]

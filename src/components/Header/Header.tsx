@@ -7,7 +7,7 @@ import { Button } from 'components'
 export const Header = () => {
   return (
     <S.Container>
-      <Link href="#">
+      <Link href="/">
         <S.Logo.Container>
           <SvgLogo />
           <S.Logo.Text>
@@ -16,12 +16,12 @@ export const Header = () => {
         </S.Logo.Container>
       </Link>
       <S.Navigation.Container>
-        <Button alt iconSize="1.75em" onClick={() => alert('oi')}>
+        <Button.Void iconSize="1.75em" onClick={() => alert('oi')}>
           <SvgMoon />
-        </Button>
-        <Button alt iconSize="1.75em">
+        </Button.Void>
+        <Button.Void iconSize="1.75em">
           <SvgHelpCircle />
-        </Button>
+        </Button.Void>
       </S.Navigation.Container>
     </S.Container>
   )

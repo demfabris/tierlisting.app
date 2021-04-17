@@ -11,12 +11,13 @@ const Index = () => {
         <S.Title>
           <Title text="Create a new tierlist." />
         </S.Title>
+        <S.Description>...and nothing else.</S.Description>
         <S.Button>
           <Link href="new">
-            <Button filled={true}>
+            <Button.Filled>
               New tierlist
               <SvgPlus />
-            </Button>
+            </Button.Filled>
           </Link>
         </S.Button>
       </S.Container>

@@ -4,7 +4,7 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 10em;
+  min-height: 10em;
   width: 100%;
 `
 
@@ -14,15 +14,15 @@ const LogoContainer = styled.div`
   justify-content: space-between;
   cursor: pointer;
 
+  color: var(--fg);
   font: ${(props) => props.theme.font.big};
-  color: ${(props) => props.theme.colors.fg};
 `
 
 const LogoText = styled.p`
   margin-left: 0.5em;
 
   > b {
-    color: ${(props) => props.theme.colors.sg};
+    color: var(--sg);
   }
 
   @media (max-width: 360px) {

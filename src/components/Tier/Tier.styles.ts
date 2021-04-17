@@ -1,34 +1,40 @@
 import styled from 'styled-components'
 
 type StyledProps = { editing: boolean }
-const Container = styled.li`
+const Container = styled.li<StyledProps>`
   width: 100%;
   height: 5em;
   list-style-type: none;
   border-radius: 2px;
   margin: 0.25em auto;
 
-  border: 2px solid ${(props) => props.theme.colors.sg};
+  border: 2px solid var(--sg);
   box-shadow: ${(props) => props.theme.shadows.hard};
+
+  ${({ editing }) => {
+    if (editing) {
+      return `
+        transform: translateX(2em);
+      `
+    }
+  }}
 `
 
 const TierHeadContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   height: 100%;
 `
 
-const TierHeadInput = styled.span<StyledProps>`
-  --sg: ${(props) => props.theme.colors.sg};
-  --fg: ${(props) => props.theme.colors.fg};
-  --bg: ${(props) => props.theme.colors.bg};
-
+const TierHeadInput = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 5em;
   border: none;
+  z-index: 5;
 
   overflow: hidden;
   text-align: center;
@@ -36,25 +42,28 @@ const TierHeadInput = styled.span<StyledProps>`
   word-wrap: break-word;
   hyphens: auto;
 
-  transition: ${(props) => props.theme.transitions.fast};
   font: ${(props) => props.theme.font.regularBold};
   border-right: 2px solid var(--sg);
   color: var(--fg);
   background: var(--bg);
-
-  transform: ${(props) => (!props.editing ? 'translateX(-2em)' : 'none')};
 `
 
-const TierHeadEditWrapper = styled.div`
-  --sg: ${(props) => props.theme.colors.sg};
-
+const TierHeadEditWrapper = styled.div<StyledProps>`
+  position: absolute;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 2em;
+  transform: scale(0.3);
 
-  border-right: 2px solid var(--sg);
+  ${({ editing }) => {
+    if (editing) {
+      return `
+      transform: translateX(-2em) scale(1);
+    `
+    }
+  }}
 `
 
 export const S = {

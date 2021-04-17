@@ -12,8 +12,10 @@ interface Props {
   destroy: () => void
 }
 export const Tier = ({ ...props }: Props) => {
+  const editing = useToggleEditStore((state) => state.editing)
+
   return (
-    <S.Container>
+    <S.Container editing={editing}>
       <TierHead {...props} />
     </S.Container>
   )
@@ -26,12 +28,7 @@ const TierHead = ({ ...props }: Props) => {
   return (
     <S.TierHead.Container>
       <TierHeadEditButtons headInputRef={ref} {...props} />
-      <S.TierHead.Input
-        ref={ref}
-        spellCheck={false}
-        contentEditable={editing}
-        editing={editing}
-      >
+      <S.TierHead.Input ref={ref} spellCheck={false} contentEditable={editing}>
         Tier {props._id}
       </S.TierHead.Input>
     </S.TierHead.Container>
@@ -45,17 +42,17 @@ const TierHeadEditButtons = ({
   headInputRef,
   ...props
 }: ITierHeadEditButtons) => {
+  const editing = useToggleEditStore((state) => state.editing)
   const handleClickEditText = (target: HTMLSpanElement) => {
     target.focus()
   }
 
   return (
-    <S.TierHead.Edit.Wrapper>
-      <Button alt height="1em" width="1em" role="button" title="Add image">
+    <S.TierHead.Edit.Wrapper editing={editing}>
+      <Button.Void height="1em" width="1em" role="button" title="Add image">
         <SvgImage />
-      </Button>
-      <Button
-        alt
+      </Button.Void>
+      <Button.Void
         height="1em"
         width="1em"
         role="button"
@@ -63,9 +60,8 @@ const TierHeadEditButtons = ({
         onClick={() => handleClickEditText(headInputRef.current)}
       >
         <SvgType />
-      </Button>
-      <Button
-        alt
+      </Button.Void>
+      <Button.Void
         height="1em"
         width="1em"
         role="button"
@@ -73,7 +69,7 @@ const TierHeadEditButtons = ({
         onClick={() => props.destroy()}
       >
         <SvgTrash />
-      </Button>
+      </Button.Void>
     </S.TierHead.Edit.Wrapper>
   )
 }

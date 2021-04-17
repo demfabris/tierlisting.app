@@ -1,7 +1,12 @@
-import { theme, darkTheme, lightTheme } from '../styles'
+import { theme, darkTheme, lightTheme } from 'styles'
 
 declare namespace AppSettings {
-  export type Theme = typeof theme & (typeof darkTheme | typeof lightTheme)
+  type Base = typeof theme
+  type Variation = typeof darkTheme & typeof lightTheme
+
+  type Theme = Base & Variation
+
+  export interface CurrentTheme extends Theme {}
 }
 
 export = AppSettings
