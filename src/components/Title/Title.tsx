@@ -12,11 +12,11 @@ export const Title = ({ text, canEdit = false, ...rest }: Props) => {
   const ref = useRef<HTMLHeadingElement>(null!)
   const editing = useToggleEditStore((state) => state.editing)
 
-  useEffect(() => {
-    if (editing && canEdit) {
-      ref.current.focus()
-    }
-  }, [editing])
+  /* useEffect(() => { */
+  /*   if (editing && canEdit) { */
+  /*     ref.current.focus() */
+  /*   } */
+  /* }, [editing]) */
 
   return (
     <S.Container {...rest} editing={editing}>

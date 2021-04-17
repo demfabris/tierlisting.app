@@ -2,7 +2,7 @@ import { MutableRefObject, useRef } from 'react'
 
 import { Button } from 'components'
 import { useToggleEditStore } from 'store'
-import { SvgImage, SvgType, SvgTrash } from 'assets'
+import { SvgImage, SvgType, SvgTrash, SvgMove } from 'assets'
 
 import { S } from './Tier.styles'
 
@@ -13,10 +13,10 @@ interface Props {
 }
 export const Tier = ({ ...props }: Props) => {
   const editing = useToggleEditStore((state) => state.editing)
-
   return (
     <S.Container editing={editing}>
       <TierHead {...props} />
+      <TierMoveButton />
     </S.Container>
   )
 }
@@ -65,11 +65,27 @@ const TierHeadEditButtons = ({
         height="1em"
         width="1em"
         role="button"
-        title="Clear"
+        title="Delete"
         onClick={() => props.destroy()}
       >
         <SvgTrash />
       </Button.Void>
     </S.TierHead.Edit.Wrapper>
+  )
+}
+
+const TierMoveButton = () => {
+  const editing = useToggleEditStore((state) => state.editing)
+  return (
+    <S.Move.Container editing={editing}>
+      <Button.Void
+        height="1.25em"
+        width="1.25em"
+        role="button"
+        title="Move tier"
+      >
+        <SvgMove />
+      </Button.Void>
+    </S.Move.Container>
   )
 }

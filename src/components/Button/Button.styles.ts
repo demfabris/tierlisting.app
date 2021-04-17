@@ -41,10 +41,6 @@ const Filled = styled(Base)<StyledProps>`
   * {
     color: var(--bg);
   }
-
-  &:hover {
-    background: var(--sg);
-  }
 `
 
 const Alt = styled(Base)<StyledProps>`
@@ -62,10 +58,6 @@ const Outlined = styled(Base)<StyledProps>`
   svg {
     color: var(--fg);
   }
-
-  &:hover {
-    background: var(--sg);
-  }
 `
 
 const Void = styled(Base)<StyledProps>`
@@ -77,12 +69,6 @@ const Void = styled(Base)<StyledProps>`
   svg {
     margin: 0;
     color: var(--fg);
-  }
-
-  &:hover {
-    * {
-      color: var(--sg);
-    }
   }
 
   &:active {

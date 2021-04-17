@@ -9,12 +9,14 @@ const Container = styled.li<StyledProps>`
   margin: 0.25em auto;
 
   border: 2px solid var(--sg);
+  transform-origin: left;
   box-shadow: ${(props) => props.theme.shadows.hard};
 
   ${({ editing }) => {
     if (editing) {
       return `
         transform: translateX(2em);
+        margin-left: 0;
       `
     }
   }}
@@ -66,6 +68,16 @@ const TierHeadEditWrapper = styled.div<StyledProps>`
   }}
 `
 
+const TierMoveButtonContainer = styled.div<StyledProps>`
+  align-items: center;
+  position: absolute;
+  right: 1em;
+  top: 0;
+  height: 100%;
+
+  display: ${(props) => (props.editing ? 'flex' : 'none')};
+`
+
 export const S = {
   Container,
   TierHead: {
@@ -74,5 +86,8 @@ export const S = {
     Edit: {
       Wrapper: TierHeadEditWrapper
     }
+  },
+  Move: {
+    Container: TierMoveButtonContainer
   }
 }

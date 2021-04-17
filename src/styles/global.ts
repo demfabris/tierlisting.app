@@ -21,4 +21,9 @@ export const GlobalStyle = createGlobalStyle`
   #__next {
     background: ${(props) => props.theme.colors.bg};
   }
+
+  body {
+    overflow-y: scroll;
+  }
+
 `
