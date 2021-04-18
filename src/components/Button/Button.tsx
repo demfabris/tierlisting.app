@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import { S } from './Button.styles'
 
 interface Props {
@@ -9,20 +10,36 @@ interface Props {
   [rest: string]: unknown
 }
 
-const Filled = ({ children, ...props }: Props) => (
-  <S.Filled {...props}>{children}</S.Filled>
+const Filled = forwardRef<HTMLButtonElement, Props>(
+  ({ children, ...props }: Props, ref) => (
+    <S.Filled {...props} ref={ref}>
+      {children}
+    </S.Filled>
+  )
 )
 
-const Alt = ({ children, ...props }: Props) => (
-  <S.Alt {...props}>{children}</S.Alt>
+const Alt = forwardRef<HTMLButtonElement, Props>(
+  ({ children, ...props }: Props, ref) => (
+    <S.Alt {...props} ref={ref}>
+      {children}
+    </S.Alt>
+  )
 )
 
-const Outlined = ({ children, ...props }: Props) => (
-  <S.Outlined {...props}>{children}</S.Outlined>
+const Outlined = forwardRef<HTMLButtonElement, Props>(
+  ({ children, ...props }: Props, ref) => (
+    <S.Outlined {...props} ref={ref}>
+      {children}
+    </S.Outlined>
+  )
 )
 
-const Void = ({ children, ...props }: Props) => (
-  <S.Void {...props}>{children}</S.Void>
+const Void = forwardRef<HTMLButtonElement, Props>(
+  ({ children, ...props }: Props, ref) => (
+    <S.Void {...props} ref={ref}>
+      {children}
+    </S.Void>
+  )
 )
 
 export const Button = {
