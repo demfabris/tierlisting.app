@@ -20,7 +20,10 @@ const Label = styled.span`
 `
 
 const ToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
   position: relative;
+  height: 100%;
 `
 
 const ToggleSlider = styled.label`

@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     outline: none;
     box-sizing: border-box;
+    font: ${(props) => props.theme.font.regular};
   }
 
   html,

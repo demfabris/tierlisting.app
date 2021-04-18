@@ -1,7 +1,7 @@
-import { SvgEdit } from 'assets'
 import { Layout, Title, Toggle } from 'components'
-import { Tierlist } from 'modules'
+import { TierlistAndStashModule } from 'modules'
 import { useToggleEditStore } from 'store'
+import { SvgEdit } from 'assets'
 
 import { S } from './styles/new.styles'
 
@@ -17,7 +17,7 @@ const New = () => {
         <S.Title>
           <Title text="My tierlist" canEdit={true} />
         </S.Title>
-        <Tierlist />
+        <TierlistAndStashModule />
       </S.Container>
     </Layout>
   )

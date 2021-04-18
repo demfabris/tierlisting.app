@@ -20,8 +20,10 @@ const LogoContainer = styled.div`
 
 const LogoText = styled.p`
   margin-left: 0.5em;
+  font: ${(props) => props.theme.font.regularBold};
 
   > b {
+    font: ${(props) => props.theme.font.regularBold};
     color: var(--sg);
   }
 `

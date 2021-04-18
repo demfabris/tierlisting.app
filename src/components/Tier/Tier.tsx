@@ -10,8 +10,8 @@ import { S } from './Tier.styles'
 interface Props {
   id: string
   index: number
-  items: string[]
-  destroy: () => void
+  items: App.Items
+  handleDestroyTier: () => void
 }
 export const Tier = ({ ...props }: Props) => {
   return (
@@ -56,7 +56,7 @@ const TierHeadEditButtons = ({ ...props }: Props) => {
         width="1em"
         role="button"
         title="Delete"
-        onClick={() => props.destroy()}
+        onClick={() => props.handleDestroyTier()}
       >
         <SvgTrash />
       </Button.Void>
