@@ -1,4 +1,4 @@
-export function destroy<T extends { id: number }>(id: number, state: T[]): T[] {
+export function destroy<T extends { id: string }>(id: string, state: T[]): T[] {
   return state.filter((tier) => tier.id !== id)
 }
 

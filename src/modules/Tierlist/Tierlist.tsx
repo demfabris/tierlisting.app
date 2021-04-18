@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { nanoid as uuid } from 'nanoid'
 
 import { append, destroy, reorder } from 'common/utils'
 import { Button, Tier } from 'components'
@@ -7,11 +8,17 @@ import { SvgPlus } from 'assets'
 import { S } from './Tierlist.styles'
 
 interface Tier {
-  id: number
+  id: string
   items: string[]
 }
 export const Tierlist = () => {
-  const [tiers, setTiers] = useState<Tier[]>([{ id: 0, items: [] }])
+  const [tiers, setTiers] = useState<Tier[]>([])
+
+  const newTier = useCallback(() => ({ id: uuid(), items: [] }), [])
+
+  useEffect(() => {
+    setTiers((state) => append(newTier(), state))
+  }, [])
 
   return (
     <>
@@ -25,8 +32,8 @@ export const Tierlist = () => {
             <S.Container ref={innerRef} {...droppableProps}>
               {tiers.map(({ id, items }, index) => (
                 <Tier
-                  key={id}
                   id={id}
+                  key={id}
                   index={index}
                   items={items}
                   destroy={() => setTiers((state) => destroy(id, state))}
@@ -39,9 +46,7 @@ export const Tierlist = () => {
       </DragDropContext>
       <S.Button>
         <Button.Outlined
-          onClick={() =>
-            setTiers((state) => append({ id: state.length, items: [] }, state))
-          }
+          onClick={() => setTiers((state) => append(newTier(), state))}
         >
           Add tier
           <SvgPlus />

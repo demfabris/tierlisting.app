@@ -19,6 +19,7 @@ export const Title = ({ text, canEdit = false, ...rest }: Props) => {
   /* }, [editing]) */
 
   useEffect(() => {
+    // Insert text through ref because of warning
     ref.current.innerText = text
   }, [])
 

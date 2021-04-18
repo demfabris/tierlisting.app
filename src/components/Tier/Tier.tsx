@@ -8,14 +8,14 @@ import { SvgImage, SvgTrash, SvgMove } from 'assets'
 import { S } from './Tier.styles'
 
 interface Props {
-  id: number
+  id: string
   index: number
   items: string[]
   destroy: () => void
 }
 export const Tier = ({ ...props }: Props) => {
   return (
-    <Draggable draggableId={props.id.toString()} index={props.index}>
+    <Draggable draggableId={props.id} index={props.index}>
       {({ draggableProps, dragHandleProps, innerRef }) => (
         <S.Container ref={innerRef} {...draggableProps}>
           <TierHead {...props} />
@@ -30,7 +30,9 @@ const TierHead = ({ ...props }: Props) => {
   const ref = useRef<HTMLSpanElement>(null!)
 
   useEffect(() => {
-    ref.current.innerText = `Tier ${props.id + 1}`
+    if (!ref.current.innerText) {
+      ref.current.innerText = `Tier ${props.index + 1}`
+    }
   }, [])
 
   return (
