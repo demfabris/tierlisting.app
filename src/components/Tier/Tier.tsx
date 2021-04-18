@@ -1,65 +1,53 @@
-import { MutableRefObject, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { Draggable } from 'react-beautiful-dnd'
 
 import { Button } from 'components'
 import { useToggleEditStore } from 'store'
-import { SvgImage, SvgType, SvgTrash, SvgMove } from 'assets'
+import { SvgImage, SvgTrash, SvgMove } from 'assets'
 
 import { S } from './Tier.styles'
 
 interface Props {
-  _id: number
+  id: number
+  index: number
   items: string[]
   destroy: () => void
 }
 export const Tier = ({ ...props }: Props) => {
-  const editing = useToggleEditStore((state) => state.editing)
   return (
-    <S.Container editing={editing}>
-      <TierHead {...props} />
-      <TierMoveButton />
-    </S.Container>
+    <Draggable draggableId={props.id.toString()} index={props.index}>
+      {({ draggableProps, dragHandleProps, innerRef }) => (
+        <S.Container ref={innerRef} {...draggableProps}>
+          <TierHead {...props} />
+          <TierMoveButton {...dragHandleProps} />
+        </S.Container>
+      )}
+    </Draggable>
   )
 }
 
 const TierHead = ({ ...props }: Props) => {
   const ref = useRef<HTMLSpanElement>(null!)
-  const editing = useToggleEditStore((state) => state.editing)
+
+  useEffect(() => {
+    ref.current.innerText = `Tier ${props.id + 1}`
+  }, [])
 
   return (
     <S.TierHead.Container>
-      <TierHeadEditButtons headInputRef={ref} {...props} />
-      <S.TierHead.Input ref={ref} spellCheck={false} contentEditable={editing}>
-        Tier {props._id}
-      </S.TierHead.Input>
+      <TierHeadEditButtons {...props} />
+      <S.TierHead.Input contentEditable={true} spellCheck={false} ref={ref} />
     </S.TierHead.Container>
   )
 }
 
-interface ITierHeadEditButtons extends Props {
-  headInputRef: MutableRefObject<HTMLSpanElement>
-}
-const TierHeadEditButtons = ({
-  headInputRef,
-  ...props
-}: ITierHeadEditButtons) => {
+const TierHeadEditButtons = ({ ...props }: Props) => {
   const editing = useToggleEditStore((state) => state.editing)
-  const handleClickEditText = (target: HTMLSpanElement) => {
-    target.focus()
-  }
 
   return (
     <S.TierHead.Edit.Wrapper editing={editing}>
       <Button.Void height="1em" width="1em" role="button" title="Add image">
         <SvgImage />
-      </Button.Void>
-      <Button.Void
-        height="1em"
-        width="1em"
-        role="button"
-        title="Add text"
-        onClick={() => handleClickEditText(headInputRef.current)}
-      >
-        <SvgType />
       </Button.Void>
       <Button.Void
         height="1em"
@@ -74,16 +62,11 @@ const TierHeadEditButtons = ({
   )
 }
 
-const TierMoveButton = () => {
+const TierMoveButton = ({ ...dragHandleProps }) => {
   const editing = useToggleEditStore((state) => state.editing)
   return (
-    <S.Move.Container editing={editing}>
-      <Button.Void
-        height="1.25em"
-        width="1.25em"
-        role="button"
-        title="Move tier"
-      >
+    <S.Move.Container editing={editing} {...dragHandleProps}>
+      <Button.Void role="button" title="Move tier">
         <SvgMove />
       </Button.Void>
     </S.Move.Container>

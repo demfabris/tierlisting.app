@@ -9,7 +9,7 @@ const Container = styled.div`
 `
 
 const Title = styled.div`
-  margin: 3em auto;
+  margin: 1.5em auto;
   margin-left: 0;
 `
 
@@ -19,7 +19,7 @@ const ButtonContainer = styled.div`
   align-items: center;
   width: 100%;
 
-  margin: 3em auto;
+  margin: 1.5em auto;
 `
 
 export const S = {

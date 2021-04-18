@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 type StyledProps = { editing: boolean }
-const Container = styled.li<StyledProps>`
+const Container = styled.li`
+  position: relative;
   width: 100%;
   height: 5em;
   list-style-type: none;
@@ -9,17 +10,8 @@ const Container = styled.li<StyledProps>`
   margin: 0.25em auto;
 
   border: 2px solid var(--sg);
-  transform-origin: left;
+  background: var(--bg);
   box-shadow: ${(props) => props.theme.shadows.hard};
-
-  ${({ editing }) => {
-    if (editing) {
-      return `
-        transform: translateX(2em);
-        margin-left: 0;
-      `
-    }
-  }}
 `
 
 const TierHeadContainer = styled.div`
@@ -27,6 +19,7 @@ const TierHeadContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
+  width: 5em;
 `
 
 const TierHeadInput = styled.span`
@@ -52,30 +45,49 @@ const TierHeadInput = styled.span`
 
 const TierHeadEditWrapper = styled.div<StyledProps>`
   position: absolute;
-  left: 0;
   display: flex;
+  justify-content: space-space-between;
+  height: 100%;
+  right: 0;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   transform: scale(0.3);
 
+  transition: ${(props) => props.theme.transitions.fast};
+
   ${({ editing }) => {
     if (editing) {
       return `
-      transform: translateX(-2em) scale(1);
-    `
+        transform: translateX(1.75em) scale(1);
+      `
     }
   }}
 `
 
 const TierMoveButtonContainer = styled.div<StyledProps>`
+  display: flex;
   align-items: center;
   position: absolute;
   right: 1em;
   top: 0;
   height: 100%;
 
-  display: ${(props) => (props.editing ? 'flex' : 'none')};
+  transition: ${(props) => props.theme.transitions.fast};
+
+  opacity: 0;
+  transform: scale(0.3);
+  pointer-events: none;
+
+  ${({ editing }) => {
+    if (editing) {
+      return `
+        transform: scale(1);
+        opacity: 1;
+        pointer-events: auto;
+      `
+    }
+  }}
 `
 
 export const S = {

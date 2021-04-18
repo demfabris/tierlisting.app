@@ -1,7 +1,6 @@
 export { Layout } from './Layout'
 export { Header } from './Header'
-export { Main } from './Main'
 export { Button } from './Button'
 export { Title } from './Title'
 export { Tier } from './Tier'
-export { ToggleEdit } from './ToggleEdit'
+export { Toggle } from './Toggle'

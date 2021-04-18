@@ -18,6 +18,10 @@ const Container = styled.div`
   height: 100%;
   width: 900px;
   margin: 0 2em;
+
+  @media (max-width: 400px) {
+    margin: 0 1em;
+  }
 `
 
 export const S = {

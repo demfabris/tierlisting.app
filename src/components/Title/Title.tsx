@@ -18,15 +18,17 @@ export const Title = ({ text, canEdit = false, ...rest }: Props) => {
   /*   } */
   /* }, [editing]) */
 
+  useEffect(() => {
+    ref.current.innerText = text
+  }, [])
+
   return (
     <S.Container {...rest} editing={editing}>
       <S.Input
         spellCheck="false"
         contentEditable={canEdit && editing}
         ref={ref}
-      >
-        {text}
-      </S.Input>
+      />
     </S.Container>
   )
 }

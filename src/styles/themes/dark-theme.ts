@@ -6,6 +6,7 @@ export const darkTheme = {
     sgAlt: '#fac863',
     sgAtt: '#ec5f67',
     hg: '#f99157',
+    tg: '#99c794',
     disabled: '#a7adba'
   }
 }

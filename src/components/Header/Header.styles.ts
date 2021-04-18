@@ -24,10 +24,6 @@ const LogoText = styled.p`
   > b {
     color: var(--sg);
   }
-
-  @media (max-width: 360px) {
-    display: none;
-  }
 `
 
 const NavigationContainer = styled.div`
