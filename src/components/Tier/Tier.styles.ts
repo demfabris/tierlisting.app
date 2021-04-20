@@ -12,11 +12,14 @@ const Container = styled.li`
   margin: 0.25em auto;
 
   border: 2px solid var(--sg);
-  background: var(--bg);
+  // background: var(--bg);
   box-shadow: ${(props) => props.theme.shadows.hard};
 `
 
 const TierItemsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: 100%;
 `

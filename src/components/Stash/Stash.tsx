@@ -8,12 +8,12 @@ import { S } from './Stash.styles'
 import { useToggleEditStore } from 'store'
 
 interface Props {
-  items: App.Items
+  stashItems: App.Items
   handleAddItemToStash: () => void
   handleRemoveItemFromStash: (element: App.Item) => void
 }
 export const Stash = ({
-  items,
+  stashItems,
   handleAddItemToStash,
   handleRemoveItemFromStash
 }: Props) => {
@@ -23,10 +23,10 @@ export const Stash = ({
         <Droppable droppableId="stash" direction="horizontal" type="items">
           {({ droppableProps, innerRef, placeholder }) => (
             <S.Items.Container ref={innerRef} {...droppableProps}>
-              {[...items].map((item, index) => (
+              {[...stashItems].map((item, index) => (
                 <Item
-                  key={index}
                   index={index}
+                  key={item.id}
                   id={item.id}
                   url={item.url}
                   isInStash={true}

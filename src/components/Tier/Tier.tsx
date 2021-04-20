@@ -28,16 +28,18 @@ export const Tier = ({ ...props }: Props) => {
 }
 
 const TierItems = ({ items, id }: Pick<Props, 'items' | 'id'>) => {
-  useEffect(() => {
-    console.log(items)
-  }, [items])
-
   return (
     <Droppable droppableId={id} direction="horizontal" type="items">
       {({ droppableProps, innerRef, placeholder }) => (
         <S.TierItems.Container {...droppableProps} ref={innerRef}>
-          {[...items].map(({ ...itemProps }, index) => (
-            <Item {...itemProps} index={index} />
+          {[...items].map((item, index) => (
+            <Item
+              id={item.id}
+              key={item.id}
+              url={item.url}
+              index={index}
+              isInStash={false}
+            />
           ))}
           {placeholder}
         </S.TierItems.Container>

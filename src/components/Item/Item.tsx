@@ -10,7 +10,7 @@ import { S } from './Item.styles'
 interface Props extends App.Item {
   index: number
   isInStash: boolean
-  handleRemoveItemFromStash: () => void
+  handleRemoveItemFromStash?: () => void
 }
 export const Item = ({
   id,
@@ -30,9 +30,12 @@ export const Item = ({
           ref={innerRef}
           editing={editing}
         >
+          {id}
           {editing && isInStash ? (
             <S.Remove>
-              <Button.Void onClick={() => handleRemoveItemFromStash()}>
+              <Button.Void
+                onClick={() => handleRemoveItemFromStash?.call(this)}
+              >
                 <SvgTrash />
               </Button.Void>
             </S.Remove>

@@ -3,12 +3,14 @@ import styled from 'styled-components'
 type StyledProps = { editing: boolean }
 const Container = styled.div<StyledProps>`
   position: relative;
-  width: 5em;
-  height: 5em;
+  width: calc(80px - 4px);
+  height: calc(80px - 4px);
   border-radius: 2px;
   background: green;
 
-  opacity: ${(props) => (props.editing ? '0.5' : '1')}; //for now
+  opacity: ${(props) => (props.editing ? '0.5' : '1')};
+  font-size: 10px;
+  text-overflow: clip;
 `
 
 const Remove = styled.div`
