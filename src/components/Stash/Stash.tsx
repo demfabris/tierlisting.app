@@ -1,52 +1,47 @@
-import { Draggable, Droppable } from 'react-beautiful-dnd'
+import { Droppable } from 'react-beautiful-dnd'
 
-import { Button } from 'components'
+import { Button, Item } from 'components'
 import { SvgPlus } from 'assets'
 
 import { S } from './Stash.styles'
-import { useEffect } from 'react'
+/* import { useEffect } from 'react' */
 import { useToggleEditStore } from 'store'
 
 interface Props {
-  stash: App.Items
+  items: App.Items
   handleAddItemToStash: () => void
+  handleRemoveItemFromStash: (element: App.Item) => void
 }
-export const Stash = ({ stash, handleAddItemToStash }: Props) => {
-  useEffect(() => {
-    console.log(stash)
-  }, [stash])
-
+export const Stash = ({
+  items,
+  handleAddItemToStash,
+  handleRemoveItemFromStash
+}: Props) => {
   return (
-    <S.Container>
-      <Droppable droppableId="stash">
-        {({ droppableProps, innerRef, placeholder }) => (
-          <S.Items.Container ref={innerRef} {...droppableProps}>
-            {stash.map(({ ...itemProps }, index) => (
-              <Item key={index} index={index} {...itemProps} />
-            ))}
-            {placeholder}
-            <Add handleAddItemToStash={handleAddItemToStash} />
-          </S.Items.Container>
-        )}
-      </Droppable>
-    </S.Container>
-  )
-}
-
-const Item = ({ id, url, index }: App.Item & { index: number }) => {
-  const editing = useToggleEditStore((state) => state.editing)
-
-  console.log(url)
-  return (
-    <Draggable draggableId={id} isDragDisabled={editing} index={index}>
-      {({ draggableProps, dragHandleProps, innerRef }) => (
-        <S.Items.Item
-          {...draggableProps}
-          {...dragHandleProps}
-          ref={innerRef}
-        ></S.Items.Item>
-      )}
-    </Draggable>
+    <>
+      <S.Container>
+        <Droppable droppableId="stash" direction="horizontal" type="items">
+          {({ droppableProps, innerRef, placeholder }) => (
+            <S.Items.Container ref={innerRef} {...droppableProps}>
+              {[...items].map((item, index) => (
+                <Item
+                  key={index}
+                  index={index}
+                  id={item.id}
+                  url={item.url}
+                  isInStash={true}
+                  handleRemoveItemFromStash={() =>
+                    handleRemoveItemFromStash(item)
+                  }
+                />
+              ))}
+              {placeholder}
+              <Add handleAddItemToStash={handleAddItemToStash} />
+            </S.Items.Container>
+          )}
+        </Droppable>
+      </S.Container>
+    </>
   )
 }
 

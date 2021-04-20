@@ -3,41 +3,48 @@ import { Droppable } from 'react-beautiful-dnd'
 import { Button, Tier } from 'components'
 import { SvgPlus } from 'assets'
 import { S } from './Tierlist.styles'
+import { useToggleEditStore } from 'store'
+import { Fragment } from 'react'
 
 interface Props {
   tiers: App.Tierlist
   handleAppendTier: () => void
-  handleDestroyTier: (id: string) => void
+  handleRemoveTier: (element: App.Tier) => void
 }
 export const Tierlist = ({
   tiers,
   handleAppendTier,
-  handleDestroyTier
+  handleRemoveTier
 }: Props) => {
+  const editing = useToggleEditStore((state) => state.editing)
+
   return (
     <>
-      <Droppable droppableId="tierlist">
+      <Droppable droppableId="tierlist" type="list">
         {({ droppableProps, innerRef, placeholder }) => (
           <S.Container ref={innerRef} {...droppableProps}>
-            {tiers.map(({ id, items }, index) => (
+            {[...tiers].map((tier, index) => (
               <Tier
-                id={id}
-                key={id}
+                id={tier.id}
+                key={tier.id}
                 index={index}
-                items={items}
-                handleDestroyTier={() => handleDestroyTier(id)}
+                items={tier.items}
+                handleRemoveTier={() => handleRemoveTier(tier)}
               />
             ))}
             {placeholder}
           </S.Container>
         )}
       </Droppable>
-      <S.Button>
-        <Button.Outlined onClick={() => handleAppendTier()}>
-          Add tier
-          <SvgPlus />
-        </Button.Outlined>
-      </S.Button>
+      {editing ? (
+        <S.Button>
+          <Button.Void iconSize="1.75em" onClick={() => handleAppendTier()}>
+            <SvgPlus />
+          </Button.Void>
+        </S.Button>
+      ) : (
+        <Fragment />
+      )}
     </>
   )
 }

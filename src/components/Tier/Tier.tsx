@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { Draggable } from 'react-beautiful-dnd'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
 
-import { Button } from 'components'
+import { Button, Item } from 'components'
 import { useToggleEditStore } from 'store'
 import { SvgImage, SvgTrash, SvgMove } from 'assets'
 
@@ -11,7 +11,7 @@ interface Props {
   id: string
   index: number
   items: App.Items
-  handleDestroyTier: () => void
+  handleRemoveTier: (element: App.Item) => void
 }
 export const Tier = ({ ...props }: Props) => {
   return (
@@ -19,10 +19,30 @@ export const Tier = ({ ...props }: Props) => {
       {({ draggableProps, dragHandleProps, innerRef }) => (
         <S.Container ref={innerRef} {...draggableProps}>
           <TierHead {...props} />
+          <TierItems {...props} />
           <TierMoveButton {...dragHandleProps} />
         </S.Container>
       )}
     </Draggable>
+  )
+}
+
+const TierItems = ({ items, id }: Pick<Props, 'items' | 'id'>) => {
+  useEffect(() => {
+    console.log(items)
+  }, [items])
+
+  return (
+    <Droppable droppableId={id} direction="horizontal" type="items">
+      {({ droppableProps, innerRef, placeholder }) => (
+        <S.TierItems.Container {...droppableProps} ref={innerRef}>
+          {[...items].map(({ ...itemProps }, index) => (
+            <Item {...itemProps} index={index} />
+          ))}
+          {placeholder}
+        </S.TierItems.Container>
+      )}
+    </Droppable>
   )
 }
 
@@ -43,7 +63,9 @@ const TierHead = ({ ...props }: Props) => {
   )
 }
 
-const TierHeadEditButtons = ({ ...props }: Props) => {
+const TierHeadEditButtons = ({
+  handleRemoveTier
+}: Pick<Props, 'handleRemoveTier'>) => {
   const editing = useToggleEditStore((state) => state.editing)
 
   return (
@@ -56,7 +78,7 @@ const TierHeadEditButtons = ({ ...props }: Props) => {
         width="1em"
         role="button"
         title="Delete"
-        onClick={() => props.handleDestroyTier()}
+        onClick={() => handleRemoveTier()}
       >
         <SvgTrash />
       </Button.Void>

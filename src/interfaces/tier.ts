@@ -8,5 +8,5 @@ export type Item = {
   url: URL
 }
 
-export type Tierlist = Tier[]
-export type Items = Array<Item>
+export type Tierlist = Set<Tier>
+export type Items = Set<Item>

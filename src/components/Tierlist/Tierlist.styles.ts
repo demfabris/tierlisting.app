@@ -10,9 +10,7 @@ const Container = styled.ul`
 const Button = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  margin-top: 1em;
+  margin: 1em 0;
 `
 
 export const S = {

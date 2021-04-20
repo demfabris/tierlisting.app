@@ -4,11 +4,6 @@ const Container = styled.div`
   width: 100%;
 `
 
-const Label = styled.span`
-  color: var(--fg);
-  font: ${(props) => props.theme.font.medium};
-`
-
 const ItemsContainer = styled.div`
   display: grid;
   position: relative;
@@ -16,7 +11,7 @@ const ItemsContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(5em, 5.25em));
   grid-auto-rows: 5.25em;
   grid-gap: 10px;
-  height: 20em;
+  height: 15em;
   width: 100%;
   overflow-y: auto;
 
@@ -29,22 +24,16 @@ const ItemsContainer = styled.div`
     content: 'Add items to start ranking';
     align-items: center;
     justify-content: center;
+    text-align: center;
     position: absolute;
     width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 0;
 
-    font: ${(props) => props.theme.font.big};
+    font: ${(props) => props.theme.font.medium};
     color: var(--disabled);
   }
-`
-
-const Item = styled.div`
-  width: 5em;
-  height: 5em;
-  border-radius: 2px;
-  background: white;
 `
 
 const Add = styled.div`
@@ -61,10 +50,8 @@ const Add = styled.div`
 
 export const S = {
   Container,
-  Label,
   Items: {
     Container: ItemsContainer,
-    Item,
     Add
   }
 }

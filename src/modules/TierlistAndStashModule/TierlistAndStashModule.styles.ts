@@ -13,7 +13,7 @@ const Tierlist = styled.div`
 
 const Stash = styled.div`
   width: 100%;
-  margin: 5em 0;
+  margin: 2.5em 0;
 `
 
 export const S = {

@@ -9,7 +9,7 @@ export const theme = {
     ultra: 'box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px'
   },
   font: {
-    head: '700 3em Poppins ',
+    head: '700 2.5em Poppins ',
     big: '700 1.5em Poppins',
     medium: '700 1.25em Poppins',
     regular: '500 1em Poppins',

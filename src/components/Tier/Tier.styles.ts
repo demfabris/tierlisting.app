@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 type StyledProps = { editing: boolean }
 const Container = styled.li`
+  display: flex;
+  flex-direction: row;
   position: relative;
   width: 100%;
   height: 5em;
@@ -12,6 +14,11 @@ const Container = styled.li`
   border: 2px solid var(--sg);
   background: var(--bg);
   box-shadow: ${(props) => props.theme.shadows.hard};
+`
+
+const TierItemsContainer = styled.div`
+  width: 100%;
+  height: 100%;
 `
 
 const TierHeadContainer = styled.div`
@@ -98,6 +105,9 @@ export const S = {
     Edit: {
       Wrapper: TierHeadEditWrapper
     }
+  },
+  TierItems: {
+    Container: TierItemsContainer
   },
   Move: {
     Container: TierMoveButtonContainer

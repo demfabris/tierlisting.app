@@ -2,55 +2,76 @@ import { useCallback, useEffect, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { nanoid as uuid } from 'nanoid'
 
-import { append, reorder, destroy } from 'common/utils'
+import { append, reorder, destroy } from 'common/utils/sets'
 import { Stash, Tierlist } from 'components'
 
 import { S } from './TierlistAndStashModule.styles'
 
 export const TierlistAndStashModule = () => {
-  const [tiers, setTiers] = useState<App.Tierlist>([])
-  const [stash, setStash] = useState<App.Items>([])
-
-  const newTier = useCallback(() => ({ id: uuid(), items: [] }), [])
+  const [tiers, setTiers] = useState<App.Tierlist>(new Set())
+  const [items, setItems] = useState<App.Items>(new Set())
 
   const handleAppendTier = useCallback(
-    () => setTiers((state) => append(newTier(), state)),
+    () => setTiers((state) => append({ id: uuid(), items: new Set() }, state)),
     []
   )
-  const handleDestroyTier = useCallback(
-    (id: string) => setTiers((state) => destroy(id, state)),
+
+  const handleRemoveTier = useCallback(
+    (element: App.Tier) => setTiers((state) => destroy(element, state)),
     []
   )
 
   const handleAddItemToStash = useCallback(
     () =>
-      setStash((state) => [
-        ...state,
-        { id: uuid(), url: new URL('https://google.com') }
-      ]),
+      setItems((state) =>
+        append({ id: uuid(), url: new URL('https://archlinux.org') }, state)
+      ),
+    []
+  )
+
+  const handleRemoveItemFromStash = useCallback(
+    (element: App.Item) =>
+      setItems((state) => {
+        console.log(state, element)
+        return destroy(element, state)
+      }),
     []
   )
 
   useEffect(() => {
-    setTiers((state) => append(newTier(), state))
+    handleAppendTier()
   }, [])
 
   return (
     <S.Container>
       <DragDropContext
         onDragEnd={(event) => {
-          setTiers(reorder(tiers, event.source.index, event.destination?.index))
+          if (event.source.droppableId === 'tierlist') {
+            setTiers(
+              reorder(tiers, event.source.index, event.destination?.index)
+            )
+          }
+
+          if (event.source.droppableId === 'stash') {
+            console.log(event.destination)
+            const destinationId = event.destination?.droppableId!
+            // TODO: SETTIER LOGIC BUT NOW WITH SETS
+          }
         }}
       >
         <S.Tierlist>
           <Tierlist
             tiers={tiers}
             handleAppendTier={handleAppendTier}
-            handleDestroyTier={handleDestroyTier}
+            handleRemoveTier={handleRemoveTier}
           />
         </S.Tierlist>
         <S.Stash>
-          <Stash stash={stash} handleAddItemToStash={handleAddItemToStash} />
+          <Stash
+            items={items}
+            handleAddItemToStash={handleAddItemToStash}
+            handleRemoveItemFromStash={handleRemoveItemFromStash}
+          />
         </S.Stash>
       </DragDropContext>
     </S.Container>
