@@ -1,8 +1,12 @@
-import { theme, darkTheme, lightTheme } from '../styles'
+import { theme, darkTheme } from '../styles'
 
-export function useThemeSwitch (mode: 'dark' | 'light'): AppSettings.Theme {
+export function useThemeSwitch(mode: 'dark' | 'light'): AppSettings.Theme {
   const dark = { ...theme, ...darkTheme }
-  const light = { ...theme, ...lightTheme }
+  // const light = { ...theme, ...lightTheme }
 
-  return dark // TODO: Watch for change
+  if (mode === 'dark') {
+    return dark
+  } else {
+    return dark // TODO: Watch for change
+  }
 }

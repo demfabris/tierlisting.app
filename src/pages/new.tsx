@@ -3,7 +3,7 @@ import { TierlistAndStashModule } from 'modules'
 import { useToggleEditStore } from 'store'
 import { SvgEdit } from 'assets'
 
-import { S } from './styles/new.styles'
+import { S } from 'styles/pages/new.styles'
 
 const New = () => {
   const { editing, toggle } = useToggleEditStore((state) => state)

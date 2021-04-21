@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { SvgPlus } from 'assets'
 import { Layout, Button, Title } from '../components'
 
-import { S } from './styles/index.styles'
+import { S } from 'styles/pages/index.styles'
 
 const Index = () => {
   return (
