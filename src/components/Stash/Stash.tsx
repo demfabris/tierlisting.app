@@ -1,16 +1,16 @@
 import { Droppable } from 'react-beautiful-dnd'
+import { nanoid } from 'nanoid'
 
+import { useToggleEditStore } from 'store'
 import { Button, Item } from 'components'
 import { SvgPlus } from 'assets'
 
 import { S } from './Stash.styles'
-/* import { useEffect } from 'react' */
-import { useToggleEditStore } from 'store'
 
 interface Props {
   stashItems: App.Items
-  handleAddItemToStash: () => void
-  handleRemoveItemFromStash: (element: App.Item) => void
+  handleAddItemToStash: (item: App.Item, index: number) => void
+  handleRemoveItemFromStash: (id: string) => void
 }
 export const Stash = ({
   stashItems,
@@ -23,15 +23,15 @@ export const Stash = ({
         <Droppable droppableId="stash" direction="horizontal" type="items">
           {({ droppableProps, innerRef, placeholder }) => (
             <S.Items.Container ref={innerRef} {...droppableProps}>
-              {[...stashItems].map((item, index) => (
+              {[...stashItems].map(({ id, url }, index) => (
                 <Item
                   index={index}
-                  key={item.id}
-                  id={item.id}
-                  url={item.url}
+                  key={id}
+                  id={id}
+                  url={url}
                   isInStash={true}
                   handleRemoveItemFromStash={() =>
-                    handleRemoveItemFromStash(item)
+                    handleRemoveItemFromStash(id)
                   }
                 />
               ))}
@@ -53,7 +53,12 @@ const Add = ({ handleAddItemToStash }: Pick<Props, 'handleAddItemToStash'>) => {
       <Button.Void
         width="100%"
         height="100% !important"
-        onClick={() => handleAddItemToStash()}
+        onClick={() =>
+          handleAddItemToStash(
+            { id: nanoid(), url: new URL('https://archlinux.org') },
+            0
+          )
+        }
       >
         <SvgPlus />
       </Button.Void>

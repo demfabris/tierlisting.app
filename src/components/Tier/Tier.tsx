@@ -11,7 +11,7 @@ interface Props {
   id: string
   index: number
   items: App.Items
-  handleRemoveTier: (element: App.Item) => void
+  handleRemoveTier: (id: string) => void
 }
 export const Tier = ({ ...props }: Props) => {
   return (
@@ -29,7 +29,7 @@ export const Tier = ({ ...props }: Props) => {
 
 const TierItems = ({ items, id }: Pick<Props, 'items' | 'id'>) => {
   return (
-    <Droppable droppableId={id} direction="horizontal" type="items">
+    <Droppable droppableId={`tier_${id}`} direction="horizontal" type="items">
       {({ droppableProps, innerRef, placeholder }) => (
         <S.TierItems.Container {...droppableProps} ref={innerRef}>
           {[...items].map((item, index) => (
@@ -66,8 +66,9 @@ const TierHead = ({ ...props }: Props) => {
 }
 
 const TierHeadEditButtons = ({
+  id,
   handleRemoveTier
-}: Pick<Props, 'handleRemoveTier'>) => {
+}: Pick<Props, 'handleRemoveTier' | 'id'>) => {
   const editing = useToggleEditStore((state) => state.editing)
 
   return (
@@ -80,7 +81,7 @@ const TierHeadEditButtons = ({
         width="1em"
         role="button"
         title="Delete"
-        onClick={() => handleRemoveTier()}
+        onClick={() => handleRemoveTier(id)}
       >
         <SvgTrash />
       </Button.Void>

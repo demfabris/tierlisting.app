@@ -10,7 +10,6 @@ const Container = styled.div<StyledProps>`
 
   opacity: ${(props) => (props.editing ? '0.5' : '1')};
   font-size: 10px;
-  text-overflow: clip;
 `
 
 const Remove = styled.div`

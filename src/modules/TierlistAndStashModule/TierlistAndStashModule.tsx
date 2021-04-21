@@ -1,29 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { nanoid as uuid } from 'nanoid'
 
-import { append, reorder, destroy } from 'common/utils/sets'
+import { append, reorder, destroy } from 'common/utils'
 
 import { Stash, Tierlist } from 'components'
 
 import { S } from './TierlistAndStashModule.styles'
 
 export const TierlistAndStashModule = () => {
-  const [tiers, setTiers] = useState<App.Tierlist>(new Set())
-  const [stashItems, setStashItems] = useState<App.Items>(new Set())
+  const [tiers, setTiers] = useState<App.Tierlist>([])
+  const [stashItems, setStashItems] = useState<App.Items>([])
 
   function handleAppendTier() {
-    setTiers((state) => append({ id: uuid(), items: new Set() }, state))
+    setTiers((state) => append({ id: uuid(), items: [] }, state))
   }
 
-  function handleRemoveTier(element: App.Tier) {
-    setTiers((state) => {
-      if (element) {
-        return destroy(element, state)
-      } else {
-        return state
-      }
-    })
+  function handleRemoveTier(tierId: string) {
+    setTiers((state) => destroy(tierId, state))
   }
 
   function handleReorderTiers(sourceIndex: number, destinationIndex?: number) {
@@ -31,35 +25,44 @@ export const TierlistAndStashModule = () => {
   }
 
   function handleAddItemToTier(
-    targetId: string,
-    index: number,
-    element: App.Item
+    targetTierId: string,
+    item: App.Item,
+    index: number
   ) {
-    setTiers((state) => {
-      const target = Array.from(state).find((tier) => tier.id === targetId)!
-      target.items = append(element, target.items, index)
+    setTiers((state) =>
+      state.map((tier) => {
+        if (`tier_${tier.id}` === targetTierId) {
+          tier.items = append(item, tier.items, index)
+        }
 
-      return new Set([...state, target])
-    })
+        return tier
+      })
+    )
+  }
+
+  function handleRemoveItemFromTier(targetTierId: string, itemId: string) {
+    setTiers((state) =>
+      state.map((tier) => {
+        if (`tier_${tier.id}` === targetTierId) {
+          tier.items = destroy(itemId, tier.items)
+        }
+
+        return tier
+      })
+    )
   }
 
   function handleReorderStash(sourceIndex: number, destinationIndex?: number) {
     setStashItems((state) => reorder(state, sourceIndex, destinationIndex))
   }
 
-  function handleAddItemToStash() {
-    setStashItems((state) =>
-      append({ id: uuid(), url: new URL('https://archlinux.org') }, state)
-    )
+  function handleAddItemToStash(item: App.Item, index: number) {
+    setStashItems((state) => append(item, state, index))
   }
 
-  function handleRemoveItemFromStash(element: App.Item) {
-    setStashItems((state) => destroy(element, state))
+  function handleRemoveItemFromStash(itemId: string) {
+    setStashItems((state) => destroy(itemId, state))
   }
-
-  useEffect(() => {
-    console.log(tiers)
-  }, [tiers])
 
   return (
     <S.Container>
@@ -68,31 +71,63 @@ export const TierlistAndStashModule = () => {
           const originId = event.source.droppableId
           const targetId = event.destination?.droppableId
 
+          // Dropped outisde valid container
           if (targetId === undefined) {
             return void null
           }
 
+          // Moving tier from tierlist to tierlist
           if (originId === 'tierlist') {
-            // Moving tier from tierlist to tierlist
             handleReorderTiers(event.source.index, event.destination?.index)
+
+            return void null
           }
 
-          if (originId === 'stash') {
-            if (targetId === 'stash') {
-              // Moving item from stash to stash
-              handleReorderStash(event.source.index, event.destination?.index)
+          // Moving item from stash to stash
+          if (originId === 'stash' && targetId === 'stash') {
+            handleReorderStash(event.source.index, event.destination?.index)
 
-              return void null
+            return void null
+          }
+
+          // Moving item from stash to tier
+          if (originId === 'stash' && targetId.includes('tier_')) {
+            const movedItem = stashItems[event.source.index]
+
+            handleAddItemToTier(targetId, movedItem, event.destination!.index)
+            handleRemoveItemFromStash(movedItem.id)
+
+            return void null
+          }
+
+          // Moving item from tier to tier
+          if (originId.includes('tier_') && targetId.includes('tier_')) {
+            const movedItem = tiers.find(
+              (tier) => `tier_${tier.id}` === originId
+            )?.items[event.source.index]
+
+            console.log(movedItem)
+
+            if (movedItem) {
+              handleAddItemToTier(targetId, movedItem, event.destination!.index)
+              handleRemoveItemFromTier(originId, movedItem.id)
             }
 
-            console.log({ src: event.source, dest: event.destination })
-            const movedItem = Array.from(stashItems)[event.source.index]
-            handleAddItemToTier(targetId!, event.destination!.index, movedItem)
-            handleRemoveItemFromStash(movedItem)
+            return void null
           }
 
-          if (targetId === 'stash') {
-            // Moving item from tierlist to stash
+          // Moving item from tierlist to stash
+          if (originId.includes('tier_') && targetId === 'stash') {
+            const movedItem = tiers.find(
+              (tier) => `tier_${tier.id}` === originId
+            )?.items[event.source.index]
+
+            if (movedItem) {
+              handleAddItemToStash(movedItem, event.destination!.index)
+              handleRemoveItemFromTier(originId, movedItem.id)
+            }
+
+            return void null
           }
         }}
       >

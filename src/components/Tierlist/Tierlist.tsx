@@ -9,7 +9,7 @@ import { Fragment } from 'react'
 interface Props {
   tiers: App.Tierlist
   handleAppendTier: () => void
-  handleRemoveTier: (element: App.Tier) => void
+  handleRemoveTier: (id: string) => void
 }
 export const Tierlist = ({
   tiers,
@@ -29,7 +29,7 @@ export const Tierlist = ({
                 key={tier.id}
                 index={index}
                 items={tier.items}
-                handleRemoveTier={() => handleRemoveTier(tier)}
+                handleRemoveTier={() => handleRemoveTier(tier.id)}
               />
             ))}
             {placeholder}
