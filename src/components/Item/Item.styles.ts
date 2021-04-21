@@ -1,19 +1,16 @@
 import styled from 'styled-components'
 
 type StyledProps = { editing: boolean }
-const Container = styled.div<StyledProps>`
+const Container = styled.div`
   position: relative;
   width: calc(80px - 4px);
   height: calc(80px - 4px);
-  border-radius: 2px;
-  background: green;
-
-  opacity: ${(props) => (props.editing ? '0.5' : '1')};
-  font-size: 10px;
+  z-index: 999;
 `
 
 const Remove = styled.div`
   position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
   display: flex;
@@ -21,7 +18,16 @@ const Remove = styled.div`
   justify-content: center;
 `
 
+const Thumbnail = styled.img<StyledProps>`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  filter: ${(props) => (props.editing ? 'brightness(30%)' : '')};
+`
+
 export const S = {
   Container,
-  Remove
+  Remove,
+  Thumbnail
 }

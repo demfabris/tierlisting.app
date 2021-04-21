@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 import { Button, Item } from 'components'
 import { useToggleEditStore } from 'store'
-import { SvgImage, SvgTrash, SvgMove } from 'assets'
+import { SvgTrash, SvgMove, SvgType } from 'assets'
 
 import { S } from './Tier.styles'
 
@@ -12,6 +12,7 @@ interface Props {
   index: number
   items: App.Items
   handleRemoveTier: (id: string) => void
+  handleRemoveItemFromTier: (tierId: string, itemId: string) => void
 }
 export const Tier = ({ ...props }: Props) => {
   return (
@@ -27,9 +28,14 @@ export const Tier = ({ ...props }: Props) => {
   )
 }
 
-const TierItems = ({ items, id }: Pick<Props, 'items' | 'id'>) => {
+const TierItems = ({
+  items,
+  id,
+  handleRemoveItemFromTier
+}: Pick<Props, 'items' | 'id' | 'handleRemoveItemFromTier'>) => {
+  const tierId = `tier_${id}`
   return (
-    <Droppable droppableId={`tier_${id}`} direction="horizontal" type="items">
+    <Droppable droppableId={tierId} direction="horizontal" type="items">
       {({ droppableProps, innerRef, placeholder }) => (
         <S.TierItems.Container {...droppableProps} ref={innerRef}>
           {[...items].map((item, index) => (
@@ -38,7 +44,7 @@ const TierItems = ({ items, id }: Pick<Props, 'items' | 'id'>) => {
               key={item.id}
               url={item.url}
               index={index}
-              isInStash={false}
+              handleRemoveItem={() => handleRemoveItemFromTier(tierId, item.id)}
             />
           ))}
           {placeholder}
@@ -49,6 +55,7 @@ const TierItems = ({ items, id }: Pick<Props, 'items' | 'id'>) => {
 }
 
 const TierHead = ({ ...props }: Props) => {
+  const editing = useToggleEditStore((state) => state.editing)
   const ref = useRef<HTMLSpanElement>(null!)
 
   useEffect(() => {
@@ -59,29 +66,54 @@ const TierHead = ({ ...props }: Props) => {
 
   return (
     <S.TierHead.Container>
-      <TierHeadEditButtons {...props} />
-      <S.TierHead.Input contentEditable={true} spellCheck={false} ref={ref} />
+      <TierHeadEditButtons {...props} inputRef={ref} />
+      <S.TierHead.Input
+        editing={editing}
+        contentEditable={editing}
+        spellCheck={false}
+        ref={ref}
+      />
     </S.TierHead.Container>
   )
 }
 
 const TierHeadEditButtons = ({
-  id,
-  handleRemoveTier
-}: Pick<Props, 'handleRemoveTier' | 'id'>) => {
+  inputRef,
+  ...props
+}: Props & { inputRef: MutableRefObject<HTMLSpanElement> }) => {
+  const [canType, setCanType] = useState(false)
   const editing = useToggleEditStore((state) => state.editing)
 
+  useEffect(() => {
+    inputRef.current.addEventListener('focusout', () => setCanType(false))
+  }, [])
+
+  useEffect(() => {
+    if (canType) {
+      inputRef.current.innerHTML = '&nbsp;'
+      inputRef.current.focus()
+    }
+  }, [canType])
+
   return (
-    <S.TierHead.Edit.Wrapper editing={editing}>
-      <Button.Void height="1em" width="1em" role="button" title="Add image">
-        <SvgImage />
+    <S.TierHead.Edit.Wrapper editing={editing && !canType}>
+      <Button.Void
+        height="1.25em"
+        width="1.25em"
+        role="button"
+        title="Edit tier name"
+        onClick={() => {
+          setCanType((state) => !state)
+        }}
+      >
+        <SvgType />
       </Button.Void>
       <Button.Void
-        height="1em"
-        width="1em"
+        height="1.25em"
+        width="1.25em"
         role="button"
         title="Delete"
-        onClick={() => handleRemoveTier(id)}
+        onClick={() => props.handleRemoveTier(props.id)}
       >
         <SvgTrash />
       </Button.Void>

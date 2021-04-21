@@ -22,6 +22,9 @@ const TierItemsContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  z-index: 2;
+
+  background: var(--bg);
 `
 
 const TierHeadContainer = styled.div`
@@ -30,46 +33,51 @@ const TierHeadContainer = styled.div`
   flex-direction: row;
   height: 100%;
   width: 5em;
+
+  background: var(--bg);
 `
 
-const TierHeadInput = styled.span`
+const TierHeadInput = styled.span<StyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 5em;
   border: none;
-  z-index: 5;
+  z-index: 4;
 
   overflow: hidden;
   text-align: center;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  hyphens: auto;
 
-  font: ${(props) => props.theme.font.regularBold};
   border-right: 2px solid var(--sg);
   color: var(--fg);
   background: var(--bg);
+
+  font: ${(props) => props.theme.font.regularBold};
+  opacity: ${(props) => (props.editing ? '0.3' : '1')};
 `
 
 const TierHeadEditWrapper = styled.div<StyledProps>`
   position: absolute;
   display: flex;
-  justify-content: space-space-between;
   height: 100%;
-  right: 0;
-  flex-direction: column;
+  width: 100%;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   transform: scale(0.3);
+  z-index: 5;
+  opacity: 0;
 
   transition: ${(props) => props.theme.transitions.fast};
 
   ${({ editing }) => {
     if (editing) {
       return `
-        transform: translateX(1.75em) scale(1);
+        opacity: 1;
+        transform: scale(1);
       `
     }
   }}
@@ -82,6 +90,7 @@ const TierMoveButtonContainer = styled.div<StyledProps>`
   right: 1em;
   top: 0;
   height: 100%;
+  z-index: 3;
 
   transition: ${(props) => props.theme.transitions.fast};
 

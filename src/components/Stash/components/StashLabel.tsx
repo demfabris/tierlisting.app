@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import { Container } from './StashLabel.styles'
 
 interface Props {
@@ -29,5 +30,5 @@ export const StashLabel = ({ editing, itemCount }: Props) => {
     }
   }, [editing, itemCount])
 
-  return <Container>{text}</Container>
+  return <Container editing={editing}>{text}</Container>
 }

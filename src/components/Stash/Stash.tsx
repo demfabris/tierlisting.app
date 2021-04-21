@@ -23,23 +23,24 @@ export const Stash = ({
   return (
     <>
       <S.Container>
+        <Add handleAddItemToStash={handleAddItemToStash} />
         <Droppable droppableId="stash" direction="horizontal" type="items">
           {({ droppableProps, innerRef, placeholder }) => (
-            <S.Items.Container ref={innerRef} {...droppableProps}>
+            <S.Items.Container
+              editing={editing}
+              ref={innerRef}
+              {...droppableProps}
+            >
               {[...stashItems].map(({ id, url }, index) => (
                 <Item
                   index={index}
                   key={id}
                   id={id}
                   url={url}
-                  isInStash={true}
-                  handleRemoveItemFromStash={() =>
-                    handleRemoveItemFromStash(id)
-                  }
+                  handleRemoveItem={() => handleRemoveItemFromStash(id)}
                 />
               ))}
               {placeholder}
-              <Add handleAddItemToStash={handleAddItemToStash} />
             </S.Items.Container>
           )}
         </Droppable>
@@ -52,22 +53,25 @@ export const Stash = ({
 const Add = ({ handleAddItemToStash }: Pick<Props, 'handleAddItemToStash'>) => {
   const editing = useToggleEditStore((state) => state.editing)
 
-  return editing ? (
-    <S.Items.Add>
-      <Button.Void
-        width="100%"
-        height="100% !important"
+  return (
+    <S.Items.Add editing={editing}>
+      <Button.Filled
+        iconSize="1.5em"
         onClick={() =>
           handleAddItemToStash(
-            { id: nanoid(), url: new URL('https://archlinux.org') },
+            {
+              id: nanoid(),
+              url: new URL(
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png'
+              )
+            },
             0
           )
         }
       >
+        Add items
         <SvgPlus />
-      </Button.Void>
+      </Button.Filled>
     </S.Items.Add>
-  ) : (
-    <></>
   )
 }

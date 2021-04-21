@@ -1,35 +1,53 @@
 import styled from 'styled-components'
 
+type StyledProps = { editing: boolean }
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
+  margin-top: 3em;
 `
 
-const ItemsContainer = styled.div`
+const ItemsContainer = styled.div<StyledProps>`
   display: grid;
-  padding: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(5em, 5.25em));
-  grid-auto-rows: 5.25em;
-  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(5em, 1fr));
   height: 15em;
   width: 100%;
   overflow-y: auto;
-
-  box-shadow: ${(props) => props.theme.shadows.hard};
-  border: 2px solid var(--fg);
+  background: var(--bg);
   border-radius: 2px;
+
+  transition: ${(props) => props.theme.transitions.fast};
+  box-shadow: ${(props) => props.theme.shadows.hard};
+
+  ${({ editing }) => {
+    if (editing) {
+      return `
+        transform: translateY(4.25em);
+        border: 2px solid var(--disabled);
+      `
+    }
+  }}
 `
 
-const Add = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  cursor: pointer;
+const Add = styled.div<StyledProps>`
+  position: absolute;
+  z-index: 0;
+  opacity: 0;
+  transform: translateY(6em);
 
-  border: 2px solid var(--fg);
-  border-radius: 2px;
+  transition: ${(props) => props.theme.transitions.fast};
+  font: ${(props) => props.theme.font.small};
+
+  ${({ editing }) => {
+    if (editing) {
+      return `
+        transform: translateY(0em);
+        opacity: 1;
+      `
+    }
+  }}
 `
 
 export const S = {

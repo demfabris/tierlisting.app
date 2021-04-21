@@ -7,7 +7,7 @@ const Container = styled.div<StyledProps>`
   justify-content: center;
   position: relative;
 
-  opacity: ${(props) => (props.editing ? '0.5' : '1')};
+  opacity: ${(props) => (props.editing ? '0.3' : '1')};
 `
 
 const Input = styled.h1`

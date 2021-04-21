@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { nanoid as uuid } from 'nanoid'
 
@@ -64,6 +64,10 @@ export const TierlistAndStashModule = () => {
     setStashItems((state) => destroy(itemId, state))
   }
 
+  useEffect(() => {
+    handleAppendTier()
+  }, [])
+
   return (
     <S.Container>
       <DragDropContext
@@ -106,8 +110,6 @@ export const TierlistAndStashModule = () => {
               (tier) => `tier_${tier.id}` === originId
             )?.items[event.source.index]
 
-            console.log(movedItem)
-
             if (movedItem) {
               handleAddItemToTier(targetId, movedItem, event.destination!.index)
               handleRemoveItemFromTier(originId, movedItem.id)
@@ -136,6 +138,7 @@ export const TierlistAndStashModule = () => {
             tiers={tiers}
             handleAppendTier={handleAppendTier}
             handleRemoveTier={handleRemoveTier}
+            handleRemoveItemFromTier={handleRemoveItemFromTier}
           />
         </S.Tierlist>
         <S.Stash>
