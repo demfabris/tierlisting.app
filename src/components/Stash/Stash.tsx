@@ -5,6 +5,7 @@ import { useToggleEditStore } from 'store'
 import { Button, Item } from 'components'
 import { SvgPlus } from 'assets'
 
+import { StashLabel } from './components'
 import { S } from './Stash.styles'
 
 interface Props {
@@ -17,6 +18,8 @@ export const Stash = ({
   handleAddItemToStash,
   handleRemoveItemFromStash
 }: Props) => {
+  const editing = useToggleEditStore((state) => state.editing)
+
   return (
     <>
       <S.Container>
@@ -40,6 +43,7 @@ export const Stash = ({
             </S.Items.Container>
           )}
         </Droppable>
+        <StashLabel editing={editing} itemCount={stashItems.length} />
       </S.Container>
     </>
   )

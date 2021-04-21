@@ -1,0 +1,1 @@
+export { StashLabel } from './StashLabel'

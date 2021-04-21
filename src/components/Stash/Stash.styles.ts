@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
 `
 
 const ItemsContainer = styled.div`
   display: grid;
-  position: relative;
   padding: 10px;
   grid-template-columns: repeat(auto-fill, minmax(5em, 5.25em));
   grid-auto-rows: 5.25em;
@@ -18,22 +18,6 @@ const ItemsContainer = styled.div`
   box-shadow: ${(props) => props.theme.shadows.hard};
   border: 2px solid var(--fg);
   border-radius: 2px;
-
-  &::before {
-    display: flex;
-    content: 'Add items to start ranking';
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-
-    font: ${(props) => props.theme.font.medium};
-    color: var(--disabled);
-  }
 `
 
 const Add = styled.div`
