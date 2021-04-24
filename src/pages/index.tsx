@@ -11,6 +11,7 @@ const Index = () => {
   const { editing, toggleEditing } = useToggleEditStore((state) => state)
 
   useEffect(() => {
+    // Reset editing state just in case user returns
     if (editing) {
       toggleEditing()
     }

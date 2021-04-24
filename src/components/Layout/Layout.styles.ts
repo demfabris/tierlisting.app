@@ -3,9 +3,8 @@ import styled from 'styled-components'
 const View = styled.section`
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  margin: 0 auto;
 
   background-color: var(--bg);
   background-repeat: no-repeat;
@@ -15,7 +14,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   width: 900px;
   margin: 0 2em;
 
@@ -24,7 +23,21 @@ const Container = styled.div`
   }
 `
 
+const Footer = styled.footer`
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 1em;
+  margin-top: 3em;
+
+  font: ${(props) => props.theme.font.little};
+  color: var(--disabled);
+`
+
 export const S = {
   View,
-  Container
+  Container,
+  Footer
 }

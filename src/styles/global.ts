@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
   body,
   #__next {
     background: ${(props) => props.theme.colors.bg};
+    min-height: 100vh;
   }
 
   body {

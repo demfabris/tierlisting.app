@@ -10,6 +10,7 @@ export const Layout = ({ children }: Props) => (
     <S.Container>
       <Header />
       {children}
+      <S.Footer>tierlisting.app is free and open source</S.Footer>
     </S.Container>
   </S.View>
 )
