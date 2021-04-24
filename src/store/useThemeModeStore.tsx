@@ -11,7 +11,7 @@ type ThemeModeState = {
 }
 
 export const useThemeModeStore = create<ThemeModeState>((set) => ({
-  mode: ThemeModes.Dark,
+  mode: ThemeModes.Light,
   toggleThemeMode: () =>
     set((state) => ({
       mode: state.mode === ThemeModes.Dark ? ThemeModes.Light : ThemeModes.Dark

@@ -20,8 +20,8 @@ export const Header = () => {
         </S.Logo.Container>
       </Link>
       <S.Navigation.Container>
-        <Button.Void iconSize="1.75em" onClick={() => toggleThemeMode()}>
-          {mode ? <SvgMoon /> : <SvgSun />}
+        <Button.Void iconSize="1.75em" onClick={toggleThemeMode}>
+          {mode ? <SvgSun /> : <SvgMoon />}
         </Button.Void>
         <Button.Void iconSize="1.75em">
           <SvgHelpCircle />
