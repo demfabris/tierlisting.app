@@ -26,7 +26,7 @@ const Base = styled.button<StyledProps>`
   width: ${(props) => props.width};
   height: ${(props) => props.height ?? '3em'};
   font: ${(props) => props.theme.font.medium};
-  box-shadow: ${(props) => props.theme.shadows.hard};
+  box-shadow: ${(props) => props.theme.shadows.soft};
 
   svg {
     margin-left: 0.5em;
@@ -66,6 +66,7 @@ const Void = styled(Base)<StyledProps>`
   border: none;
   padding: 0;
   height: auto;
+  box-shadow: none;
 
   svg {
     margin: 0;

@@ -12,7 +12,7 @@ const Container = styled.li`
 
   border-radius: ${(props) => props.theme.borders.radius};
   border: ${(props) => props.theme.borders.shape} var(--sg);
-  box-shadow: ${(props) => props.theme.shadows.hard};
+  box-shadow: ${(props) => props.theme.shadows.soft};
 `
 
 const TierItemsContainer = styled.div`
@@ -69,6 +69,7 @@ const TierHeadEditWrapper = styled.div<StyledProps>`
   transform: scale(0.3);
   z-index: 5;
   opacity: 0;
+  top: 0;
 
   transition: ${(props) => props.theme.transitions.fast};
 

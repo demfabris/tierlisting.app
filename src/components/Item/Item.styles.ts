@@ -16,6 +16,10 @@ const Remove = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  svg {
+    color: white;
+  }
 `
 
 const Thumbnail = styled.img<StyledProps>`

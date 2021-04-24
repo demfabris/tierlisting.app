@@ -19,12 +19,12 @@ const ItemsContainer = styled.div<StyledProps>`
 
   border-radius: ${(props) => props.theme.borders.radius};
   transition: ${(props) => props.theme.transitions.fast};
-  box-shadow: ${(props) => props.theme.shadows.hard};
 
   ${({ editing, theme }) => {
     if (editing) {
       return `
         transform: translateY(4.25em);
+        box-shadow: ${theme.shadows.soft};
         border: ${theme.borders.shape} var(--disabled);
       `
     }
