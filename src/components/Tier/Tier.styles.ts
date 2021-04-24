@@ -8,11 +8,10 @@ const Container = styled.li`
   width: 100%;
   height: 5em;
   list-style-type: none;
-  border-radius: 2px;
   margin: 0.25em auto;
 
-  border: 2px solid var(--sg);
-  // background: var(--bg);
+  border-radius: ${(props) => props.theme.borders.radius};
+  border: ${(props) => props.theme.borders.shape} var(--sg);
   box-shadow: ${(props) => props.theme.shadows.hard};
 `
 
@@ -51,10 +50,10 @@ const TierHeadInput = styled.span<StyledProps>`
   overflow-wrap: break-word;
   word-wrap: break-word;
 
-  border-right: 2px solid var(--sg);
   color: var(--fg);
   background: var(--bg);
 
+  border-right: ${(props) => props.theme.borders.shape} var(--sg);
   font: ${(props) => props.theme.font.regularBold};
   opacity: ${(props) => (props.editing ? '0.3' : '1')};
 `

@@ -1,10 +1,21 @@
 import Link from 'next/link'
+import { useEffect } from 'react'
+
 import { SvgPlus } from 'assets'
-import { Layout, Button, Title } from '../components'
+import { Layout, Button, Title } from 'components'
 
 import { S } from 'styles/pages/index.styles'
+import { useToggleEditStore } from 'store'
 
 const Index = () => {
+  const { editing, toggleEditing } = useToggleEditStore((state) => state)
+
+  useEffect(() => {
+    if (editing) {
+      toggleEditing()
+    }
+  }, [])
+
   return (
     <Layout>
       <S.Container>

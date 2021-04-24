@@ -16,6 +16,17 @@ const LogoContainer = styled.div`
 
   color: var(--fg);
   font: ${(props) => props.theme.font.big};
+
+  svg {
+    #lower,
+    #right {
+      fill: var(--fg);
+    }
+
+    #left {
+      fill: var(--sg);
+    }
+  }
 `
 
 const LogoText = styled.p`

@@ -6,13 +6,13 @@ import { SvgEdit } from 'assets'
 import { S } from 'styles/pages/new.styles'
 
 const New = () => {
-  const { editing, toggle } = useToggleEditStore((state) => state)
+  const { toggleEditing } = useToggleEditStore((state) => state)
 
   return (
     <Layout>
       <S.Container>
         <S.Button.Container>
-          <Toggle label={<SvgEdit />} onToggle={() => toggle(!editing)} />
+          <Toggle label={<SvgEdit />} onToggle={() => toggleEditing()} />
         </S.Button.Container>
         <S.Title>
           <Title text="My tierlist" canEdit={true} />

@@ -1,10 +1,14 @@
 import Link from 'next/link'
-import { SvgHelpCircle, SvgLogo, SvgMoon } from 'assets'
+
+import { Button } from 'components'
+import { useThemeModeStore } from 'store'
+import { SvgHelpCircle, SvgLogo, SvgMoon, SvgSun } from 'assets'
 
 import { S } from './Header.styles'
-import { Button } from 'components'
 
 export const Header = () => {
+  const { mode, toggleThemeMode } = useThemeModeStore((state) => state)
+
   return (
     <S.Container>
       <Link href="/">
@@ -16,8 +20,8 @@ export const Header = () => {
         </S.Logo.Container>
       </Link>
       <S.Navigation.Container>
-        <Button.Void iconSize="1.75em" onClick={() => alert('oi')}>
-          <SvgMoon />
+        <Button.Void iconSize="1.75em" onClick={() => toggleThemeMode()}>
+          {mode ? <SvgMoon /> : <SvgSun />}
         </Button.Void>
         <Button.Void iconSize="1.75em">
           <SvgHelpCircle />

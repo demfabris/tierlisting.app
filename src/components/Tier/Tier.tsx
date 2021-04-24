@@ -123,6 +123,7 @@ const TierHeadEditButtons = ({
 
 const TierMoveButton = ({ ...dragHandleProps }) => {
   const editing = useToggleEditStore((state) => state.editing)
+
   return (
     <S.Move.Container editing={editing} {...dragHandleProps}>
       <Button.Void role="button" title="Move tier">

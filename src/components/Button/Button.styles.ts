@@ -36,7 +36,8 @@ const Base = styled.button<StyledProps>`
 `
 
 const Filled = styled(Base)<StyledProps>`
-  background: ${(props) => (props.active ? 'var(--active)' : 'var(--fg)')};
+  background: ${(props) => (props.active ? 'var(--active)' : 'var(--sg)')};
+  color: var(--bg);
 
   * {
     color: var(--bg);
@@ -53,7 +54,7 @@ const Alt = styled(Base)<StyledProps>`
 
 const Outlined = styled(Base)<StyledProps>`
   color: var(--fg);
-  border: 2px solid var(--sg);
+  border: ${(props) => props.theme.borders.shape} var(--sg);
 
   svg {
     color: var(--fg);

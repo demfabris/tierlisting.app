@@ -16,16 +16,16 @@ const ItemsContainer = styled.div<StyledProps>`
   width: 100%;
   overflow-y: auto;
   background: var(--bg);
-  border-radius: 2px;
 
+  border-radius: ${(props) => props.theme.borders.radius};
   transition: ${(props) => props.theme.transitions.fast};
   box-shadow: ${(props) => props.theme.shadows.hard};
 
-  ${({ editing }) => {
+  ${({ editing, theme }) => {
     if (editing) {
       return `
         transform: translateY(4.25em);
-        border: 2px solid var(--disabled);
+        border: ${theme.borders.shape} var(--disabled);
       `
     }
   }}

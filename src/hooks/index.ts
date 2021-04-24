@@ -1,1 +1,1 @@
-export { useThemeSwitch } from './useThemeSwitch'
+export { useThemeAssemble } from './useThemeAssemble'

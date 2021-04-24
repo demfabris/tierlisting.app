@@ -21,5 +21,9 @@ export const theme = {
     fancy: '.5s ease',
     bouncy: '.6s cubic-bezier(0.25, 0.75, 0.5, 1.25)',
     bouncyFast: '.4s cubic-bezier(0.25, 0.75, 0.5, 1.25)'
+  },
+  borders: {
+    shape: '3px solid',
+    radius: '3px'
   }
 }
