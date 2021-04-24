@@ -37,13 +37,17 @@ const LogoText = styled.p`
     font: ${(props) => props.theme.font.regularBold};
     color: var(--sg);
   }
+
+  @media (max-width: 420px) {
+    font: ${(props) => props.theme.font.tinyBold};
+  }
 `
 
 const NavigationContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 6em;
+  width: 9em;
 `
 
 export const S = {

@@ -14,7 +14,8 @@ export const theme = {
     medium: '700 1.25em Poppins',
     regular: '500 1em Poppins',
     regularBold: '700 1em Poppins',
-    small: '500 0.875em Poppins'
+    small: '500 0.875em Poppins',
+    tinyBold: '700 0.675em Poppins'
   },
   transitions: {
     fast: '.3s ease',
