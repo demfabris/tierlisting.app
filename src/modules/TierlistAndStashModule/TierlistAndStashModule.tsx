@@ -24,6 +24,22 @@ export const TierlistAndStashModule = () => {
     setTiers((state) => reorder(state, sourceIndex, destinationIndex))
   }
 
+  function handleReorderItemsInTier(
+    targetTierId: string,
+    sourceIndex: number,
+    destinationIndex?: number
+  ) {
+    setTiers((state) =>
+      state.map((tier) => {
+        if (`tier_${tier.id}` === targetTierId) {
+          tier.items = reorder(tier.items, sourceIndex, destinationIndex)
+        }
+
+        return tier
+      })
+    )
+  }
+
   function handleAddItemToTier(
     targetTierId: string,
     item: App.Item,
@@ -100,6 +116,23 @@ export const TierlistAndStashModule = () => {
 
             handleAddItemToTier(targetId, movedItem, event.destination!.index)
             handleRemoveItemFromStash(movedItem.id)
+
+            return void null
+          }
+
+          // Moving item from tier to same tier
+          if (originId === targetId) {
+            const movedItem = tiers.find(
+              (tier) => `tier_${tier.id}` === originId
+            )?.items[event.source.index]
+
+            if (movedItem) {
+              handleReorderItemsInTier(
+                targetId,
+                event.source.index,
+                event.destination!.index
+              )
+            }
 
             return void null
           }
