@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     --tg: ${(props) => props.theme.colors.tg};
     --hg: ${(props) => props.theme.colors.hg};
     --disabled: ${(props) => props.theme.colors.disabled};
+    --faded: ${(props) => props.theme.colors.faded};
   }
 
   * {
@@ -22,12 +23,19 @@ export const GlobalStyle = createGlobalStyle`
   html,
   body,
   #__next {
-    background: ${(props) => props.theme.colors.bg};
+    background: var(--bg);
     min-height: 100vh;
   }
 
   body {
     overflow-y: scroll;
+  }
+
+  h1,
+  p,
+  span,
+  a {
+    color: var(--fg);
   }
 
 `

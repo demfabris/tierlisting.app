@@ -33,6 +33,11 @@ const Base = styled.button<StyledProps>`
     width: ${(props) => props.iconSize ?? '1.25em'};
     height: ${(props) => props.iconSize ?? '1.25em'};
   }
+
+  &:disabled {
+    background: var(--disabled);
+    box-shadow: none;
+  }
 `
 
 const Filled = styled(Base)<StyledProps>`

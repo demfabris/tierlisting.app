@@ -17,7 +17,8 @@ const ItemsContainer = styled.div<StyledProps>`
   overflow-y: auto;
   background: var(--bg);
 
-  border-radius: ${(props) => props.theme.borders.radius};
+  border-radius: ${(props) => props.theme.borders.radius.default};
+  border: ${(props) => props.theme.borders.shape} var(--faded);
   transition: ${(props) => props.theme.transitions.fast};
 
   ${({ editing, theme }) => {

@@ -14,7 +14,7 @@ export const Container = styled.span<StyledProps>`
 
   color: var(--disabled);
   transition: ${(props) => props.theme.transitions.fast};
-  font: ${(props) => props.theme.font.medium};
+  font: ${(props) => props.theme.font.regular};
 
   ${({ editing }) => {
     if (editing) {

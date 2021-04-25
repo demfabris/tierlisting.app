@@ -1,5 +1,7 @@
 export const theme = {
   shadows: {
+    insetSoft:
+      'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px inset, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px inset',
     soft:
       'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px',
     medium:
@@ -26,6 +28,10 @@ export const theme = {
   },
   borders: {
     shape: '3px solid',
-    radius: '3px'
+    radius: {
+      default: '3px',
+      medium: '5px',
+      large: '32px'
+    }
   }
 }

@@ -7,6 +7,7 @@ export const lightTheme = {
     sgAtt: '#d33682',
     hg: '#dc322f',
     tg: '#2aa198',
-    disabled: '#93a1a1'
+    disabled: '#93a1a1',
+    faded: '#eee8d5'
   }
 }

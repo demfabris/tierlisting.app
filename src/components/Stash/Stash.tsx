@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import { nanoid } from 'nanoid'
 
+import { AddItemsToStashModule } from 'modules'
 import { useToggleEditStore } from 'store'
-import { Button, Item } from 'components'
+import { Dialog, Button, Item } from 'components'
 import { SvgPlus } from 'assets'
 
 import { StashLabel } from './components'
@@ -51,24 +53,15 @@ export const Stash = ({
 }
 
 const Add = ({ handleAddItemToStash }: Pick<Props, 'handleAddItemToStash'>) => {
+  const [dialog, setDialog] = useState(false)
   const editing = useToggleEditStore((state) => state.editing)
 
   return (
     <S.Items.Add editing={editing}>
-      <Button.Filled
-        iconSize="1.5em"
-        onClick={() =>
-          handleAddItemToStash(
-            {
-              id: nanoid(),
-              url: new URL(
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/1200px-Tux.svg.png'
-              )
-            },
-            0
-          )
-        }
-      >
+      <Button.Filled iconSize="1.5em" onClick={() => setDialog(true)}>
+        <Dialog useDialog={() => [dialog, setDialog]}>
+          <AddItemsToStashModule />
+        </Dialog>
         Add items
         <SvgPlus />
       </Button.Filled>

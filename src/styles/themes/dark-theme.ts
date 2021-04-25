@@ -7,6 +7,7 @@ export const darkTheme = {
     sgAtt: '#ec5f67',
     hg: '#f99157',
     tg: '#99c794',
-    disabled: '#a7adba'
+    disabled: '#a7adba',
+    faded: '#343d46'
   }
 }

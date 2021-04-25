@@ -10,7 +10,7 @@ const Container = styled.li`
   list-style-type: none;
   margin: 0.25em auto;
 
-  border-radius: ${(props) => props.theme.borders.radius};
+  border-radius: ${(props) => props.theme.borders.radius.default};
   border: ${(props) => props.theme.borders.shape} var(--sg);
   box-shadow: ${(props) => props.theme.shadows.soft};
 `
