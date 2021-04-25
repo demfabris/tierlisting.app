@@ -5,8 +5,12 @@ import { useThemeModeStore } from 'store'
 import { SvgGithub, SvgHelpCircle, SvgLogo, SvgMoon, SvgSun } from 'assets'
 
 import { S } from './Header.styles'
+import { Dialog } from 'components/Dialog'
+import { useState } from 'react'
+import { AboutDialogModule } from 'modules'
 
 export const Header = () => {
+  const [dialog, setDialog] = useState(false)
   const { mode, toggleThemeMode } = useThemeModeStore((state) => state)
 
   return (
@@ -28,7 +32,10 @@ export const Header = () => {
             <SvgGithub />
           </Button.Void>
         </Link>
-        <Button.Void iconSize="1.75em">
+        <Button.Void iconSize="1.75em" onClick={() => setDialog(true)}>
+          <Dialog useDialog={() => [dialog, setDialog]}>
+            <AboutDialogModule />
+          </Dialog>
           <SvgHelpCircle />
         </Button.Void>
       </S.Navigation.Container>
