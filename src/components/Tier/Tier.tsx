@@ -15,10 +15,12 @@ interface Props {
   handleRemoveItemFromTier: (tierId: string, itemId: string) => void
 }
 export const Tier = ({ ...props }: Props) => {
+  const editing = useToggleEditStore((state) => state.editing)
+
   return (
     <Draggable draggableId={props.id} index={props.index}>
       {({ draggableProps, dragHandleProps, innerRef }) => (
-        <S.Container ref={innerRef} {...draggableProps}>
+        <S.Container editing={editing} ref={innerRef} {...draggableProps}>
           <TierHead {...props} />
           <TierItems {...props} />
           <TierMoveButton {...dragHandleProps} />

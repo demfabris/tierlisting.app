@@ -1,12 +1,20 @@
 import { useState } from 'react'
 import ImageUploading, { ImageListType } from 'react-images-uploading'
+import { nanoid } from 'nanoid'
 
 import { Button, Spinner } from 'components'
 import { SvgDelete } from 'assets'
 
 import { S } from './AddItemsToStashModule.styles'
 
-export const AddItemsToStashModule = () => {
+interface Props {
+  handleAddItemToStash: (item: App.Item, index?: number) => void
+  handleCloseDialog: () => void
+}
+export const AddItemsToStashModule = ({
+  handleAddItemToStash,
+  handleCloseDialog
+}: Props) => {
   const [files, setFiles] = useState<ImageListType>([])
   const [loading, setLoading] = useState(false)
 
@@ -26,6 +34,14 @@ export const AddItemsToStashModule = () => {
     } else {
       onImageUpload.call(globalThis)
     }
+  }
+
+  function handleOnContinue() {
+    files.forEach(({ dataUrl }) => {
+      handleAddItemToStash({ id: nanoid(), url: dataUrl })
+    })
+
+    handleCloseDialog.call(globalThis)
   }
 
   return (
@@ -55,7 +71,7 @@ export const AddItemsToStashModule = () => {
                 }}
                 uploadLoading={loading}
                 hasItems={!!imageList.length}
-                isDragging={!isDragging}
+                isDragging={!!isDragging}
                 uploadDidFail={!!errors}
                 {...dragProps}
               >
@@ -86,7 +102,14 @@ export const AddItemsToStashModule = () => {
           )}
         </ImageUploading>
         <S.Upload.Button.Continue>
-          <Button.Filled disabled={!files.length} width="100%">
+          <Button.Filled
+            disabled={!files.length}
+            width="100%"
+            onClick={(e: React.MouseEvent) => {
+              e.stopPropagation()
+              handleOnContinue()
+            }}
+          >
             Continue
           </Button.Filled>
         </S.Upload.Button.Continue>

@@ -27,7 +27,7 @@ const Thumbnail = styled.img<StyledProps>`
   height: 100%;
   object-fit: cover;
 
-  filter: ${(props) => (props.editing ? 'brightness(30%)' : '')};
+  filter: ${(props) => (props.editing ? 'brightness(60%)' : '')};
 `
 
 export const S = {

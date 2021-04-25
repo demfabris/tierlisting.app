@@ -72,7 +72,7 @@ export const TierlistAndStashModule = () => {
     setStashItems((state) => reorder(state, sourceIndex, destinationIndex))
   }
 
-  function handleAddItemToStash(item: App.Item, index: number) {
+  function handleAddItemToStash(item: App.Item, index?: number) {
     setStashItems((state) => append(item, state, index))
   }
 

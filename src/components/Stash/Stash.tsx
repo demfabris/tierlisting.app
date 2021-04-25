@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
-import { nanoid } from 'nanoid'
 
 import { AddItemsToStashModule } from 'modules'
 import { useToggleEditStore } from 'store'
@@ -12,7 +11,7 @@ import { S } from './Stash.styles'
 
 interface Props {
   stashItems: App.Items
-  handleAddItemToStash: (item: App.Item, index: number) => void
+  handleAddItemToStash: (item: App.Item, index?: number) => void
   handleRemoveItemFromStash: (id: string) => void
 }
 export const Stash = ({
@@ -60,7 +59,10 @@ const Add = ({ handleAddItemToStash }: Pick<Props, 'handleAddItemToStash'>) => {
     <S.Items.Add editing={editing}>
       <Button.Filled iconSize="1.5em" onClick={() => setDialog(true)}>
         <Dialog useDialog={() => [dialog, setDialog]}>
-          <AddItemsToStashModule />
+          <AddItemsToStashModule
+            handleAddItemToStash={handleAddItemToStash}
+            handleCloseDialog={() => setDialog(false)}
+          />
         </Dialog>
         Add items
         <SvgPlus />

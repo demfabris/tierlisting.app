@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 type StyledProps = { editing: boolean }
-const Container = styled.li`
+const Container = styled.li<StyledProps>`
   display: flex;
   flex-direction: row;
   position: relative;
@@ -11,8 +11,16 @@ const Container = styled.li`
   margin: 0.25em auto;
 
   border-radius: ${(props) => props.theme.borders.radius.default};
-  border: ${(props) => props.theme.borders.shape} var(--sg);
-  box-shadow: ${(props) => props.theme.shadows.soft};
+  border: ${(props) => props.theme.borders.shape} var(--faded);
+
+  ${({ editing, theme }) => {
+    if (editing) {
+      return `
+        box-shadow: ${theme.shadows.soft};
+        border: ${theme.borders.shape} var(--sg);
+      `
+    }
+  }}
 `
 
 const TierItemsContainer = styled.div`
@@ -53,9 +61,17 @@ const TierHeadInput = styled.span<StyledProps>`
   color: var(--fg);
   background: var(--bg);
 
-  border-right: ${(props) => props.theme.borders.shape} var(--sg);
+  border-right: ${(props) => props.theme.borders.shape} var(--faded);
   font: ${(props) => props.theme.font.regularBold};
-  opacity: ${(props) => (props.editing ? '0.3' : '1')};
+
+  ${({ editing, theme }) => {
+    if (editing) {
+      return `
+        border-right: ${theme.borders.shape} var(--sg);
+        opacity: 0.3;
+      `
+    }
+  }}
 `
 
 const TierHeadEditWrapper = styled.div<StyledProps>`

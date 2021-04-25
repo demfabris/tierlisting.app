@@ -18,7 +18,7 @@ export const Item = ({ id, url, index, handleRemoveItem }: Props) => {
     <Draggable draggableId={id} isDragDisabled={editing} index={index}>
       {({ draggableProps, dragHandleProps, innerRef }) => (
         <S.Container {...draggableProps} {...dragHandleProps} ref={innerRef}>
-          <S.Thumbnail src={url.href} alt="Item thumbnail" editing={editing} />
+          <S.Thumbnail src={url} alt="Item thumbnail" editing={editing} />
           {editing ? (
             <S.Remove>
               <Button.Void iconSize="1.5em" onClick={() => handleRemoveItem()}>

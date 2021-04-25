@@ -5,7 +5,7 @@ export type Tier = {
 
 export type Item = {
   id: string
-  url: URL
+  url: string
 }
 
 export type Tierlist = Array<Tier>

@@ -11,8 +11,10 @@ const Container = styled.div`
 
 const ItemsContainer = styled.div<StyledProps>`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(5em, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(5.25em, 1fr));
   height: 15em;
+  row-gap: 10px;
+  padding: 0.25em;
   width: 100%;
   overflow-y: auto;
   background: var(--bg);
