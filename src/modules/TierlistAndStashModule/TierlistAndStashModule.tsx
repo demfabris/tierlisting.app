@@ -11,6 +11,7 @@ import { S } from './TierlistAndStashModule.styles'
 export const TierlistAndStashModule = () => {
   const [tiers, setTiers] = useState<App.Tierlist>([])
   const [stashItems, setStashItems] = useState<App.Items>([])
+  const [elevatedTier, setElevatedTier] = useState('')
 
   function handleAppendTier() {
     setTiers((state) => append({ id: uuid(), items: [] }, state))
@@ -87,6 +88,11 @@ export const TierlistAndStashModule = () => {
   return (
     <S.Container>
       <DragDropContext
+        onDragStart={(e) => {
+          // Grab source tierId so that we can increase it's zIndex to stop
+          // weird transform overlapping behaviour
+          setElevatedTier(e.source.droppableId)
+        }}
         onDragEnd={(event) => {
           const originId = event.source.droppableId
           const targetId = event.destination?.droppableId
@@ -169,6 +175,7 @@ export const TierlistAndStashModule = () => {
         <S.Tierlist>
           <Tierlist
             tiers={tiers}
+            elevatedTierId={elevatedTier}
             handleAppendTier={handleAppendTier}
             handleRemoveTier={handleRemoveTier}
             handleRemoveItemFromTier={handleRemoveItemFromTier}

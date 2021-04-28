@@ -7,12 +7,14 @@ import { useToggleEditStore } from 'store'
 
 interface Props {
   tiers: App.Tierlist
+  elevatedTierId: string
   handleAppendTier: () => void
   handleRemoveTier: (id: string) => void
   handleRemoveItemFromTier: (tierId: string, itemId: string) => void
 }
 export const Tierlist = ({
   tiers,
+  elevatedTierId,
   handleAppendTier,
   handleRemoveTier,
   handleRemoveItemFromTier
@@ -40,6 +42,7 @@ export const Tierlist = ({
                 key={tier.id}
                 index={index}
                 items={tier.items}
+                isElevated={elevatedTierId === `tier_${tier.id}`}
                 handleRemoveTier={() => handleRemoveTier(tier.id)}
                 handleRemoveItemFromTier={handleRemoveItemFromTier}
               />

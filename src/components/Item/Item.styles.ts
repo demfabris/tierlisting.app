@@ -3,8 +3,10 @@ import styled from 'styled-components'
 type StyledProps = { editing: boolean }
 const Container = styled.div`
   position: relative;
-  width: calc(80px - 4px);
-  height: calc(80px - 4px);
+  width: 5em;
+  height: 5em;
+  min-width: 5em;
+  min-height: 5em;
   z-index: 999;
 `
 
@@ -26,8 +28,6 @@ const Thumbnail = styled.img<StyledProps>`
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  z-index: 999;
 
   filter: ${(props) => (props.editing ? 'brightness(60%)' : '')};
 `

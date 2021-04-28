@@ -15,8 +15,8 @@ const ItemsContainer = styled.div<StyledProps>`
   height: 15em;
   row-gap: 10px;
   padding: 0.25em;
-  width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   background: var(--bg);
 
   border-radius: ${(props) => props.theme.borders.radius.default};

@@ -28,7 +28,7 @@ export const AddItemsToStashModule = ({
         80,
         80,
         'JPEG',
-        75,
+        100,
         0,
         (uri) => {
           resolve(uri)

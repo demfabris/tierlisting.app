@@ -11,6 +11,7 @@ interface Props {
   id: string
   index: number
   items: App.Items
+  isElevated: boolean
   handleRemoveTier: (id: string) => void
   handleRemoveItemFromTier: (tierId: string, itemId: string) => void
 }
@@ -20,7 +21,12 @@ export const Tier = ({ ...props }: Props) => {
   return (
     <Draggable draggableId={props.id} index={props.index}>
       {({ draggableProps, dragHandleProps, innerRef }) => (
-        <S.Container editing={editing} ref={innerRef} {...draggableProps}>
+        <S.Container
+          editing={editing}
+          ref={innerRef}
+          elevated={props.isElevated}
+          {...draggableProps}
+        >
           <TierHead {...props} />
           <TierItems {...props} />
           <TierMoveButton {...dragHandleProps} />

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-type StyledProps = { editing: boolean }
+type StyledProps = { editing: boolean; elevated?: boolean }
 const Container = styled.li<StyledProps>`
   display: flex;
   flex-direction: row;
@@ -9,7 +9,7 @@ const Container = styled.li<StyledProps>`
   height: 5em;
   list-style-type: none;
   margin: 0.25em auto;
-  z-index: -1;
+  z-index: ${(props) => (props.elevated ? '99999' : '-1')};
 
   border-radius: ${(props) => props.theme.borders.radius.default};
   border: ${(props) => props.theme.borders.shape} var(--faded);
