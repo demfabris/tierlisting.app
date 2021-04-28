@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ImageUploading, { ImageListType } from 'react-images-uploading'
 import { nanoid } from 'nanoid'
 
-import { Button, Spinner } from 'components'
+import { Button, InputArea, Spinner } from 'components'
 import { SvgDelete } from 'assets'
 
 import { S } from './AddItemsToStashModule.styles'
@@ -65,7 +65,7 @@ export const AddItemsToStashModule = ({
             errors
           }) => (
             <>
-              <S.Upload.Container
+              <InputArea
                 onClick={() => {
                   handleClickToUpload(!!imageList.length, onImageUpload)
                 }}
@@ -87,7 +87,7 @@ export const AddItemsToStashModule = ({
                 <S.Upload.Spinner>
                   <Spinner loading={loading} />
                 </S.Upload.Spinner>
-              </S.Upload.Container>
+              </InputArea>
               <S.Upload.Button.Reset>
                 <Button.Void
                   onClick={onImageRemoveAll}
