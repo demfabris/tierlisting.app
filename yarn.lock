@@ -2649,6 +2649,11 @@ react-dom@^17.0.1:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
+react-image-file-resizer@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/react-image-file-resizer/-/react-image-file-resizer-0.4.3.tgz#b6dc28a65aa9435ee02a393d34be0e1966fa6735"
+  integrity sha512-G1+z2iihTEmQs6B9m1iXaUwfMpi78AjKYZYK5HnEH5SeW9OwqvJ2DlKmiFXHmm+eixFfGlj5c+nehd1LEd03kA==
+
 react-images-uploading@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/react-images-uploading/-/react-images-uploading-3.1.2.tgz#c1636bab2cc709cdce47dba3f043a33a8ffe9edf"

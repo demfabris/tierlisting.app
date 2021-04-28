@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import ImageUploading, { ImageListType } from 'react-images-uploading'
+import Resizer from 'react-image-file-resizer'
 import { nanoid } from 'nanoid'
 
 import { Button, InputArea, Spinner } from 'components'
 import { SvgDelete } from 'assets'
 
 import { S } from './AddItemsToStashModule.styles'
+
+type FileResizerReturnType = File | string | Blob | ProgressEvent<FileReader>
 
 interface Props {
   handleAddItemToStash: (item: App.Item, index?: number) => void
@@ -18,14 +21,37 @@ export const AddItemsToStashModule = ({
   const [files, setFiles] = useState<ImageListType>([])
   const [loading, setLoading] = useState(false)
 
-  function handleOnChange(uploadedFiles: ImageListType) {
+  function handleResizeFile(file: File): Promise<FileResizerReturnType> {
+    return new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        80,
+        80,
+        'JPEG',
+        75,
+        0,
+        (uri) => {
+          resolve(uri)
+        },
+        'base64'
+      )
+    })
+  }
+
+  async function handleOnChange(uploadedFiles: ImageListType) {
     if (!!uploadedFiles.length) {
       setLoading(true)
     }
 
-    // If we don't wrap this into a setTimeout somehow the thread gets locked
-    // and setLoading doesn't execute util files are set
-    setTimeout(() => setFiles(uploadedFiles))
+    const resizedFiles = uploadedFiles.map(async ({ file }) => {
+      return (await handleResizeFile(file!)) as string
+    })
+
+    Promise.all(resizedFiles).then((dataUrls) => {
+      const wrappedDataUrls = dataUrls.map((dataUrl) => ({ dataUrl }))
+
+      setFiles(wrappedDataUrls)
+    })
   }
 
   function handleClickToUpload(hasItems: boolean, onImageUpload: () => void) {
