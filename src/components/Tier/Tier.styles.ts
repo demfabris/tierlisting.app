@@ -9,6 +9,7 @@ const Container = styled.li<StyledProps>`
   height: 5em;
   list-style-type: none;
   margin: 0.25em auto;
+  z-index: -1;
 
   border-radius: ${(props) => props.theme.borders.radius.default};
   border: ${(props) => props.theme.borders.shape} var(--faded);
@@ -29,7 +30,7 @@ const TierItemsContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: -1;
 
   background: var(--bg);
 `
@@ -40,6 +41,7 @@ const TierHeadContainer = styled.div`
   flex-direction: row;
   height: 100%;
   width: 5em;
+  z-index: -1;
 
   background: var(--bg);
 `

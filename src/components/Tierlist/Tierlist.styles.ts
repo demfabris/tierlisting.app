@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  z-index: 2;
 `
 
 const TierContainer = styled.ul<StyledProps>`
@@ -15,6 +16,7 @@ const TierContainer = styled.ul<StyledProps>`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  z-index: 2;
 
   transition: ${(props) => props.theme.transitions.fast};
 
