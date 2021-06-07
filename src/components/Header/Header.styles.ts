@@ -31,10 +31,11 @@ const LogoContainer = styled.div`
 
 const LogoText = styled.p`
   margin-left: 0.5em;
-  font: ${(props) => props.theme.font.regularBold};
+  font: ${(props) => props.theme.font.small};
 
   > b {
-    font: ${(props) => props.theme.font.regularBold};
+    font: ${(props) => props.theme.font.small};
+    font-weight: 700;
     color: var(--sg);
   }
 
